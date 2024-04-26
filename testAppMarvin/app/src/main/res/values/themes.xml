@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.Marvin" parent="Theme.AppCompat.Light">
+
+    </style>
+
+    <style name="Theme.Marvin" parent="Base.Theme.Marvin" />
+</resources>
