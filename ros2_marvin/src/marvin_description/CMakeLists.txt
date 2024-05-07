@@ -8,8 +8,15 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
+
 install(
-  DIRECTORY urdf launch
+  DIRECTORY ${CMAKE_SOURCE_DIR}/../marvin_description/urdf
+  DESTINATION share/${PROJECT_NAME}
+)
+
+
+install(
+  DIRECTORY ${CMAKE_SOURCE_DIR}/../marvin_description/urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
