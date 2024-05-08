@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'marvin_controller = marvin_control.marvin_controller:main'
         ],
     },
 )
