@@ -58,11 +58,19 @@ def generate_launch_description():
         output="screen"
     )
     
+    joint_controller_node = Node(
+        package="marvin_control",
+        executable="marvin_controller",
+        output="screen"
+    )
+
+   
     ld.add_action(mqtt_publisher_node)
     ld.add_action(topic_terminal_node)
     ld.add_action(robot_state_publisher_node)
     ld.add_action(gazebo_launch)
     ld.add_action(spawn_entity_node)
+    ld.add_action(joint_controller_node)
     
     return ld
 
