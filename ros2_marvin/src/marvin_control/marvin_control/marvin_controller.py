@@ -60,6 +60,10 @@ def main(args=None):
     rclpy.init()
 
     action_client = JointControlClient()
+    
+    if len(sys.argv) < 7:
+       print("Usage: python script.py angle1 angle2 angle3 angle4 angle5 angle6")
+       sys.exit(1)
 
     # Insira os ângulos das articulações que deseja enviar como comandos de controle
     angles = [float(sys.argv[1]),
