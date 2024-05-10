@@ -22,6 +22,30 @@
         <xacro:include filename="$(find robotiq_description)/urdf/robotiq_gripper.ros2_control.xacro" />
         <!-- if we are simulating or directly communicating with the gripper we need a ros2 control instance -->
         <xacro:if value="${include_ros2_control}">
+            <ros2_control name="GazeboSimSystem" type="system">
+                <hardware>
+                    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+                </hardware>
+                <!-- Adicione as juntas do robô aqui -->
+                <joints>
+                    <joint name="joint_name" />
+                    <!-- Adicione outras juntas conforme necessário -->
+                </joints>
+                <!-- Defina os estados das juntas do robô -->
+                <state_interfaces>
+                   <position name="joint_name" />
+                   <velocity name="joint_name" />
+                   <effort name="joint_name" />
+                   <!-- Adicione outros estados conforme necessário -->
+                </state_interfaces>
+                <!-- Defina as interfaces de comando das juntas do robô -->
+                <command_interfaces>
+                    <position name="joint_name" />
+                    <velocity name="joint_name" />
+                    <effort name="joint_name" />
+                    <!-- Adicione outras interfaces de comando conforme necessário -->
+                </command_interfaces>
+            </ros2_control>
             <xacro:robotiq_gripper_ros2_control
                 name="${name}" prefix="${prefix}"
                 sim_ignition="${sim_ignition}"
