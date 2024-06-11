@@ -1,0 +1,3 @@
+[submodule "ros2_marvin/src/ros2_marvin/src/ur_description"]
+	path = ros2_marvin/src/ros2_marvin/src/ur_description
+	url = https://github.com/UniversalRobots/Universal_Robots_ROS2_Description
