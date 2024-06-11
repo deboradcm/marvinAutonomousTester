@@ -3,6 +3,7 @@ Projeto de Teste automático colaborativo em múltiplos dispositivos da Especial
 
 ```
 source install/setup.bash
-ros2 launch marvin_bringup marvin_launch.py
+ros2 launch ur_simulation_gazebo ur_sim_control.launch.py ur_type:=ur3
+
 ```
 
