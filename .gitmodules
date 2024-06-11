@@ -7,3 +7,6 @@
 [submodule "ros2_marvin/src/ros2_marvin/src/moveit2"]
 	path = ros2_marvin/src/ros2_marvin/src/moveit2
 	url = https://github.com/ros-planning/moveit2.git
+[submodule "ros2_marvin/src/ros2_marvin/src/moveit_msgs"]
+	path = ros2_marvin/src/ros2_marvin/src/moveit_msgs
+	url = https://github.com/ros-planning/moveit_msgs.git
