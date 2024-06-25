@@ -9,6 +9,16 @@ Este projeto faz parte da Especialização em IA para Engenharia de Testes de So
 - Ros2-Humble
 - Gazebo 11.10.2
 
+## Instalando o projeto
+```
+git clone --recurse-submodules https://github.com/deboradcm/marvinAutonomousTester.git
+```
+Se você encontrar um erro indicando que o pacote 'diagnostic_updater' não foi localizado, será necessário instalar o pacote utilizando o terminal.
+```
+sudo apt-get update
+sudo apt-get install ros-humble-diagnostic-updater
+```
+
 ## Adicionando o Smartphone à Simulação no Gazebo
 
 Para adicionar o smartphone à simulação no Gazebo, siga estes passos:
