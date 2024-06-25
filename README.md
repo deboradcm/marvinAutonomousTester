@@ -12,12 +12,25 @@ Este projeto faz parte da Especialização em IA para Engenharia de Testes de So
 ## Instalando o projeto
 ```
 git clone --recurse-submodules https://github.com/deboradcm/marvinAutonomousTester.git
+cd marvinAutonomousTester/ros2_marvin
+colcon build
 ```
+## Erros comuns 
 Se você encontrar um erro indicando que o pacote 'diagnostic_updater' não foi localizado, será necessário instalar o pacote utilizando o terminal.
 ```
 sudo apt-get update
 sudo apt-get install ros-humble-diagnostic-updater
 ```
+Outro erro comun esta relacionado ao arquivo test_hardware_management_srvs.cpp
+```
+cd :~/marvinAutonomousTester/ros2_marvin/src/ros2_marvin/src/ros2_control/controller_manager/test
+code test_hardware_management_srvs.cpp
+```
+E altere as linhas 150, 162 e 174 removendo o termo "PLUGIN"<br><br>
+Exemplo: A linha  150 vai de "TEST_ACTUATOR_HARDWARE_PLUGIN_NAME" para "TEST_ACTUATOR_HARDWARE_NAME"<br><br>
+Nas linhas 42, 47 e 52 também faça a remoção do termo "PLUGIN" 
+
+
 
 ## Adicionando o Smartphone à Simulação no Gazebo
 
