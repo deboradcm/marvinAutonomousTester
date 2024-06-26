@@ -1,0 +1,42 @@
+[3.109s] Invoking command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_app_v1': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_app_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_app_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_app_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_app_v1/install.log --single-version-externally-managed install_data
+[3.518s] running egg_info
+[3.518s] creating ../../build/action_app_v1/action_app_v1.egg-info
+[3.539s] writing ../../build/action_app_v1/action_app_v1.egg-info/PKG-INFO
+[3.539s] writing dependency_links to ../../build/action_app_v1/action_app_v1.egg-info/dependency_links.txt
+[3.540s] writing entry points to ../../build/action_app_v1/action_app_v1.egg-info/entry_points.txt
+[3.540s] writing requirements to ../../build/action_app_v1/action_app_v1.egg-info/requires.txt
+[3.540s] writing top-level names to ../../build/action_app_v1/action_app_v1.egg-info/top_level.txt
+[3.540s] writing manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+[3.583s] reading manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+[3.583s] adding license file 'LICENSE'
+[3.584s] writing manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+[3.584s] running build
+[3.584s] running build_py
+[3.584s] creating /home/iartes/marvinAutonomousTester/build/action_app_v1/build
+[3.584s] creating /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib
+[3.584s] creating /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[3.584s] copying action_app_v1/action_app_android_server.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[3.585s] copying action_app_v1/__init__.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[3.585s] copying action_app_v1/action_app_android_client.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[3.585s] running install
+[3.593s] running install_lib
+[3.615s] creating /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+[3.615s] copying /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1/action_app_android_server.py -> /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+[3.615s] copying /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1/__init__.py -> /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+[3.615s] copying /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1/action_app_android_client.py -> /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+[3.616s] byte-compiling /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1/action_app_android_server.py to action_app_android_server.cpython-310.pyc
+[3.616s] byte-compiling /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1/__init__.py to __init__.cpython-310.pyc
+[3.617s] byte-compiling /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1/action_app_android_client.py to action_app_android_client.cpython-310.pyc
+[3.618s] running install_data
+[3.618s] creating /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index
+[3.618s] creating /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index
+[3.618s] creating /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index/packages
+[3.618s] copying resource/action_app_v1 -> /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index/packages
+[3.618s] copying package.xml -> /home/iartes/marvinAutonomousTester/install/action_app_v1/share/action_app_v1
+[3.618s] running install_egg_info
+[3.645s] Copying ../../build/action_app_v1/action_app_v1.egg-info to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1-0.0.0-py3.10.egg-info
+[3.646s] running install_scripts
+[3.990s] Installing action_app_android_client script to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/action_app_v1
+[3.991s] Installing action_app_android_server script to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/action_app_v1
+[3.991s] writing list of installed files to '/home/iartes/marvinAutonomousTester/build/action_app_v1/install.log'
+[4.022s] Invoked command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_app_v1' returned '0': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_app_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_app_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_app_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_app_v1/install.log --single-version-externally-managed install_data

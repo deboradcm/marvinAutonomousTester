@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: mqtt_publish
+Version: 0.0.0
+Summary: Package que recebe os dados de um servidor MQTT e publica-os em um tópico.
+Maintainer: iartes
+Maintainer-email: iartes@todo.todo
+License: Apache-2.0
+License-File: LICENSE
+Requires-Dist: setuptools
+Requires-Dist: paho-mqtt
+Requires-Dist: rclpy

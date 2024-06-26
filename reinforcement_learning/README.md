@@ -57,3 +57,28 @@ Sutton, R.S., Barto, A.G. (2018). Reinforcement Learning: An Introduction. MIT P
 Mnih, V., Kavukcuoglu, K., Silver, D., et al. (2015). Human-level control through deep reinforcement learning. Nature, 518(7540), 529–533. 
 
 Watkins, C.J.C.H. (1989). Learning from Delayed Rewards. PhD thesis, University of Cambridge, England. 
+
+
+<<<<<<ADAPTAÇÃO PARA ALGORITMO IMPALA>>>>>>
+
+Mudanças principais:
+
+Separação de Atores e Aprendizes: Implementamos classes separadas Actor e Learner. Os atores coletam experiências e as enviam para uma fila compartilhada (experience_queue). O aprendiz processa essas experiências para atualizar a Q-table.
+
+Threading: Usamos threading para que os atores e o aprendiz possam operar de maneira assíncrona.
+
+Correção de Importância (V-Trace): Não implementamos a correção de importância completa (V-Trace) aqui para simplificação, mas a estrutura do código permite essa adaptação se necessário.
+Experiência Compartilhada: A fila de experiências é usada para coletar dados de múltiplos atores.
+
+Melhorias:
+Desempenho: A arquitetura distribuída pode aumentar a eficiência do aprendizado.
+Escalabilidade: Adicionar mais atores ou aprendizes é simples.
+Flexibilidade: Fácil de modificar para incluir técnicas avançadas como V-Trace.
+
+Considerações:
+Thread Safety: A fila de experiências (Queue) é segura para threads, mas deve-se garantir que as operações de leitura/escrita nas Q-tables sejam feitas corretamente.
+Parâmetros de Hiperparâmetros: Ajustar alpha, gamma, epsilon, etc., para melhores resultados em um ambiente específico.
+
+Próximos Passos:
+Implementar a correção de importância V-Trace.
+Avaliar o desempenho do algoritmo em diferentes configurações e ajustar hiperparâmetros conforme necessário.

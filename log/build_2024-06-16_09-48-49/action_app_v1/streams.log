@@ -1,0 +1,28 @@
+[2.170s] Invoking command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_app_v1': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_app_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_app_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_app_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_app_v1/install.log --single-version-externally-managed install_data
+[2.363s] running egg_info
+[2.375s] writing ../../build/action_app_v1/action_app_v1.egg-info/PKG-INFO
+[2.376s] writing dependency_links to ../../build/action_app_v1/action_app_v1.egg-info/dependency_links.txt
+[2.376s] writing entry points to ../../build/action_app_v1/action_app_v1.egg-info/entry_points.txt
+[2.376s] writing requirements to ../../build/action_app_v1/action_app_v1.egg-info/requires.txt
+[2.376s] writing top-level names to ../../build/action_app_v1/action_app_v1.egg-info/top_level.txt
+[2.402s] reading manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+[2.402s] adding license file 'LICENSE'
+[2.403s] writing manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+[2.403s] running build
+[2.403s] running build_py
+[2.403s] copying action_app_v1/action_app_android_server.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[2.403s] copying action_app_v1/__init__.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[2.403s] copying action_app_v1/action_app_android_client.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+[2.404s] running install
+[2.410s] running install_lib
+[2.422s] running install_data
+[2.422s] copying resource/action_app_v1 -> /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index/packages
+[2.422s] copying package.xml -> /home/iartes/marvinAutonomousTester/install/action_app_v1/share/action_app_v1
+[2.422s] running install_egg_info
+[2.434s] removing '/home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1-0.0.0-py3.10.egg-info' (and everything under it)
+[2.434s] Copying ../../build/action_app_v1/action_app_v1.egg-info to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1-0.0.0-py3.10.egg-info
+[2.435s] running install_scripts
+[2.533s] Installing action_app_android_client script to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/action_app_v1
+[2.533s] Installing action_app_android_server script to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/action_app_v1
+[2.533s] writing list of installed files to '/home/iartes/marvinAutonomousTester/build/action_app_v1/install.log'
+[2.554s] Invoked command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_app_v1' returned '0': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_app_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_app_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_app_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_app_v1/install.log --single-version-externally-managed install_data

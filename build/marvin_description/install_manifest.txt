@@ -1,0 +1,20 @@
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/ur3e_robotiq_2f_85_urdf.xacro
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/ur3e_urdf.xacro
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/ur3e_urdf (copy).xacro
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/robotiq_2f_85_urdf.xacro
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/worlds/marvin.world
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/ament_index/resource_index/package_run_dependencies/marvin_description
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/ament_index/resource_index/parent_prefix_path/marvin_description
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/ament_prefix_path.sh
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/ament_prefix_path.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/path.sh
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/path.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.bash
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.sh
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.zsh
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/package.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/ament_index/resource_index/packages/marvin_description
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/cmake/marvin_descriptionConfig.cmake
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/cmake/marvin_descriptionConfig-version.cmake
+/home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/package.xml

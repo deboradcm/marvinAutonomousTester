@@ -1,0 +1,42 @@
+[3.096s] Invoking command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_robo_v1': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_robo_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_robo_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_robo_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_robo_v1/install.log --single-version-externally-managed install_data
+[3.457s] running egg_info
+[3.458s] creating ../../build/action_robo_v1/action_robo_v1.egg-info
+[3.472s] writing ../../build/action_robo_v1/action_robo_v1.egg-info/PKG-INFO
+[3.472s] writing dependency_links to ../../build/action_robo_v1/action_robo_v1.egg-info/dependency_links.txt
+[3.473s] writing entry points to ../../build/action_robo_v1/action_robo_v1.egg-info/entry_points.txt
+[3.473s] writing requirements to ../../build/action_robo_v1/action_robo_v1.egg-info/requires.txt
+[3.474s] writing top-level names to ../../build/action_robo_v1/action_robo_v1.egg-info/top_level.txt
+[3.475s] writing manifest file '../../build/action_robo_v1/action_robo_v1.egg-info/SOURCES.txt'
+[3.496s] reading manifest file '../../build/action_robo_v1/action_robo_v1.egg-info/SOURCES.txt'
+[3.496s] adding license file 'LICENSE'
+[3.497s] writing manifest file '../../build/action_robo_v1/action_robo_v1.egg-info/SOURCES.txt'
+[3.497s] running build
+[3.497s] running build_py
+[3.497s] creating /home/iartes/marvinAutonomousTester/build/action_robo_v1/build
+[3.497s] creating /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib
+[3.497s] creating /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[3.497s] copying action_robo_v1/__init__.py -> /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[3.498s] copying action_robo_v1/robo_action_server.py -> /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[3.498s] copying action_robo_v1/robo_action_client.py -> /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[3.498s] running install
+[3.502s] running install_lib
+[3.514s] creating /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1
+[3.514s] copying /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1/__init__.py -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1
+[3.514s] copying /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1/robo_action_server.py -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1
+[3.514s] copying /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1/robo_action_client.py -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1
+[3.515s] byte-compiling /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1/__init__.py to __init__.cpython-310.pyc
+[3.515s] byte-compiling /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1/robo_action_server.py to robo_action_server.cpython-310.pyc
+[3.516s] byte-compiling /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1/robo_action_client.py to robo_action_client.cpython-310.pyc
+[3.516s] running install_data
+[3.516s] creating /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/ament_index
+[3.517s] creating /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/ament_index/resource_index
+[3.517s] creating /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/ament_index/resource_index/packages
+[3.517s] copying resource/action_robo_v1 -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/ament_index/resource_index/packages
+[3.517s] copying package.xml -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/action_robo_v1
+[3.517s] running install_egg_info
+[3.529s] Copying ../../build/action_robo_v1/action_robo_v1.egg-info to /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1-0.0.0-py3.10.egg-info
+[3.530s] running install_scripts
+[3.866s] Installing robo_action_client script to /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/action_robo_v1
+[3.866s] Installing robo_action_server script to /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/action_robo_v1
+[3.867s] writing list of installed files to '/home/iartes/marvinAutonomousTester/build/action_robo_v1/install.log'
+[3.891s] Invoked command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_robo_v1' returned '0': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_robo_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_robo_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_robo_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_robo_v1/install.log --single-version-externally-managed install_data
