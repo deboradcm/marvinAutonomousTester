@@ -5,9 +5,9 @@ Este projeto faz parte da Especialização em IA para Engenharia de Testes de So
 
 ## Requisitos
 
-- Ubuntu-22.04.1
-- Ros2-Humble
-- Gazebo 11.10.2
+- Ubuntu 22.04.4 LTS (jammy)
+- [Ros2-Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+- [Gazebo 11.10.2](https://classic.gazebosim.org/tutorials?tut=install_ubuntu)
 
 ## Instalando o projeto
 ```
@@ -54,6 +54,6 @@ Para adicionar o smartphone à simulação no Gazebo, siga estes passos:
 
 ```bash
 cd marvinAutonomousTester/ros2_marvin
-colcon build
+colcon build --parallel-workers 2
 source install/setup.bash
 ros2 launch ur_simulation_gazebo ur_sim_control.launch.py ur_type:=ur3
