@@ -16,3 +16,6 @@
 [submodule "ros2_marvin/src/ros2_marvin/src/ros2_controllers"]
 	path = ros2_marvin/src/ros2_marvin/src/ros2_controllers
 	url = https://github.com/ros-controls/ros2_controllers.git
+[submodule "ros2_marvin/ros2_marvin/src/Universal_Robots_ROS2_Gazebo_Simulation"]
+	path = ros2_marvin/ros2_marvin/src/Universal_Robots_ROS2_Gazebo_Simulation
+	url = https://github.com/deboradcm/Universal_Robots_ROS2_Gazebo_Simulation.git
