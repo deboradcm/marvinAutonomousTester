@@ -22,14 +22,15 @@ Para adicionar o smartphone à simulação no Gazebo, siga estes passos:
 1. **Baixe o Modelo do Smartphone:**
 
     Baixe o modelo do telefone em [aqui](https://app.gazebosim.org/OpenRobotics/fuel/models/Phone).
+    Na pasta de Downloads mesmo descompacte a pasta baixada. 
 
-2. **No Terminal:**
+3. **No Terminal:**
 
     ```bash
     cd ~/.gazebo
     ```
 
-3. **Crie o Diretório `models`:**
+4. **Crie o Diretório `models`:**
 
     Se o diretório não existir, crie-o:
 
@@ -38,7 +39,7 @@ Para adicionar o smartphone à simulação no Gazebo, siga estes passos:
     cd models
     ```
 
-4. **Copie o Modelo do Smartphone:**
+5. **Copie o Modelo do Smartphone:**
 
     Copie o modelo do telefone para dentro da pasta. No exemplo abaixo, estamos copiando o modelo Phone da pasta Downloads para a pasta models:
 
