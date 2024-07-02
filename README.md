@@ -11,14 +11,11 @@ Este projeto faz parte da Especialização em IA para Engenharia de Testes de So
 
 ## Instalando o projeto
 ```
-git clone --recurse-submodules https://github.com/deboradcm/marvinAutonomousTester.git
-```
-Se você encontrar um erro indicando que o pacote 'diagnostic_updater' não foi localizado, será necessário instalar o pacote utilizando o terminal.
-```
-sudo apt-get update
-sudo apt-get install ros-humble-diagnostic-updater
-```
+git clone https://github.com/deboradcm/marvinAutonomousTester.git
+cd marvinAutonomousTester/ros2_marvin/src/Universal_Robots_ROS2_Gazebo_Simulation
+git clone -b humble https://github.com/deboradcm/Universal_Robots_ROS2_Gazebo_Simulation.git .
 
+```
 ## Adicionando o Smartphone à Simulação no Gazebo
 
 Para adicionar o smartphone à simulação no Gazebo, siga estes passos:
@@ -54,6 +51,6 @@ Para adicionar o smartphone à simulação no Gazebo, siga estes passos:
 
 ```bash
 cd marvinAutonomousTester/ros2_marvin
-colcon build --parallel-workers 2
+colcon build 
 source install/setup.bash
 ros2 launch ur_simulation_gazebo ur_sim_control.launch.py ur_type:=ur3
