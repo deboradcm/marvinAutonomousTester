@@ -1,0 +1,28 @@
+[2.260s] Invoking command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/mqtt_publish': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/mqtt_publish/prefix_override:/home/iartes/marvinAutonomousTester/install/mqtt_publish/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mqtt_publish build --build-base /home/iartes/marvinAutonomousTester/build/mqtt_publish/build install --record /home/iartes/marvinAutonomousTester/build/mqtt_publish/install.log --single-version-externally-managed install_data
+[2.568s] running egg_info
+[2.588s] writing ../../build/mqtt_publish/mqtt_publish.egg-info/PKG-INFO
+[2.588s] writing dependency_links to ../../build/mqtt_publish/mqtt_publish.egg-info/dependency_links.txt
+[2.588s] writing entry points to ../../build/mqtt_publish/mqtt_publish.egg-info/entry_points.txt
+[2.588s] writing requirements to ../../build/mqtt_publish/mqtt_publish.egg-info/requires.txt
+[2.589s] writing top-level names to ../../build/mqtt_publish/mqtt_publish.egg-info/top_level.txt
+[2.627s] reading manifest file '../../build/mqtt_publish/mqtt_publish.egg-info/SOURCES.txt'
+[2.627s] adding license file 'LICENSE'
+[2.628s] writing manifest file '../../build/mqtt_publish/mqtt_publish.egg-info/SOURCES.txt'
+[2.628s] running build
+[2.628s] running build_py
+[2.628s] copying mqtt_publish/__init__.py -> /home/iartes/marvinAutonomousTester/build/mqtt_publish/build/lib/mqtt_publish
+[2.629s] copying mqtt_publish/mqtt_pub.py -> /home/iartes/marvinAutonomousTester/build/mqtt_publish/build/lib/mqtt_publish
+[2.629s] copying mqtt_publish/__init__.py -> /home/iartes/marvinAutonomousTester/build/mqtt_publish/build/lib/mqtt_publish
+[2.629s] copying mqtt_publish/mqtt_pub.py -> /home/iartes/marvinAutonomousTester/build/mqtt_publish/build/lib/mqtt_publish
+[2.629s] running install
+[2.637s] running install_lib
+[2.657s] running install_data
+[2.657s] copying resource/mqtt_publish -> /home/iartes/marvinAutonomousTester/install/mqtt_publish/share/ament_index/resource_index/packages
+[2.657s] copying package.xml -> /home/iartes/marvinAutonomousTester/install/mqtt_publish/share/mqtt_publish
+[2.657s] running install_egg_info
+[2.678s] removing '/home/iartes/marvinAutonomousTester/install/mqtt_publish/lib/python3.10/site-packages/mqtt_publish-0.0.0-py3.10.egg-info' (and everything under it)
+[2.678s] Copying ../../build/mqtt_publish/mqtt_publish.egg-info to /home/iartes/marvinAutonomousTester/install/mqtt_publish/lib/python3.10/site-packages/mqtt_publish-0.0.0-py3.10.egg-info
+[2.678s] running install_scripts
+[2.780s] Installing mqtt_publish script to /home/iartes/marvinAutonomousTester/install/mqtt_publish/lib/mqtt_publish
+[2.780s] writing list of installed files to '/home/iartes/marvinAutonomousTester/build/mqtt_publish/install.log'
+[2.806s] Invoked command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/mqtt_publish' returned '0': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/mqtt_publish/prefix_override:/home/iartes/marvinAutonomousTester/install/mqtt_publish/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/mqtt_publish build --build-base /home/iartes/marvinAutonomousTester/build/mqtt_publish/build install --record /home/iartes/marvinAutonomousTester/build/mqtt_publish/install.log --single-version-externally-managed install_data

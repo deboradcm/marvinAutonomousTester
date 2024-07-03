@@ -1,0 +1,46 @@
+[0.051s] Invoking command in '/home/iartes/marvinAutonomousTester/build/marvin_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/iartes/chess_manipulator/install/chess_manipulator:/home/iartes/ws_moveit2/install/moveit_configs_utils:/home/iartes/ws_moveit2/install/launch_param_builder:/opt/ros/humble /usr/bin/cmake /home/iartes/marvinAutonomousTester/ros2_marvin/src/marvin_description -DCMAKE_INSTALL_PREFIX=/home/iartes/marvinAutonomousTester/install/marvin_description
+[0.900s] -- The C compiler identification is GNU 11.4.0
+[0.909s] -- The CXX compiler identification is GNU 11.4.0
+[0.909s] -- Detecting C compiler ABI info
+[0.909s] -- Detecting C compiler ABI info - done
+[0.910s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.910s] -- Detecting C compile features
+[0.910s] -- Detecting C compile features - done
+[0.910s] -- Detecting CXX compiler ABI info
+[0.910s] -- Detecting CXX compiler ABI info - done
+[0.910s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.910s] -- Detecting CXX compile features
+[0.910s] -- Detecting CXX compile features - done
+[0.910s] -- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.910s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.922s] -- Configuring done
+[0.925s] -- Generating done
+[0.925s] -- Build files have been written to: /home/iartes/marvinAutonomousTester/build/marvin_description
+[1.084s] Invoked command in '/home/iartes/marvinAutonomousTester/build/marvin_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/iartes/chess_manipulator/install/chess_manipulator:/home/iartes/ws_moveit2/install/moveit_configs_utils:/home/iartes/ws_moveit2/install/launch_param_builder:/opt/ros/humble /usr/bin/cmake /home/iartes/marvinAutonomousTester/ros2_marvin/src/marvin_description -DCMAKE_INSTALL_PREFIX=/home/iartes/marvinAutonomousTester/install/marvin_description
+[1.084s] Invoking command in '/home/iartes/marvinAutonomousTester/build/marvin_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/iartes/chess_manipulator/install/chess_manipulator:/home/iartes/ws_moveit2/install/moveit_configs_utils:/home/iartes/ws_moveit2/install/launch_param_builder:/opt/ros/humble /usr/bin/cmake --build /home/iartes/marvinAutonomousTester/build/marvin_description -- -j8 -l8
+[1.161s] Invoked command in '/home/iartes/marvinAutonomousTester/build/marvin_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/iartes/chess_manipulator/install/chess_manipulator:/home/iartes/ws_moveit2/install/moveit_configs_utils:/home/iartes/ws_moveit2/install/launch_param_builder:/opt/ros/humble /usr/bin/cmake --build /home/iartes/marvinAutonomousTester/build/marvin_description -- -j8 -l8
+[1.284s] Invoking command in '/home/iartes/marvinAutonomousTester/build/marvin_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/iartes/chess_manipulator/install/chess_manipulator:/home/iartes/ws_moveit2/install/moveit_configs_utils:/home/iartes/ws_moveit2/install/launch_param_builder:/opt/ros/humble /usr/bin/cmake --install /home/iartes/marvinAutonomousTester/build/marvin_description
+[1.298s] -- Install configuration: ""
+[1.298s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf
+[1.298s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/ur3e_robotiq_2f_85_urdf.xacro
+[1.305s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/ur3e_urdf.xacro
+[1.305s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/ur3e_urdf (copy).xacro
+[1.306s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/urdf/robotiq_2f_85_urdf.xacro
+[1.307s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/worlds
+[1.308s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/worlds/marvin.world
+[1.308s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/ament_index/resource_index/package_run_dependencies/marvin_description
+[1.309s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/ament_index/resource_index/parent_prefix_path/marvin_description
+[1.310s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/ament_prefix_path.sh
+[1.311s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/ament_prefix_path.dsv
+[1.312s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/path.sh
+[1.313s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/environment/path.dsv
+[1.313s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.bash
+[1.314s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.sh
+[1.315s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.zsh
+[1.316s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/local_setup.dsv
+[1.316s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/package.dsv
+[1.317s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/ament_index/resource_index/packages/marvin_description
+[1.318s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/cmake/marvin_descriptionConfig.cmake
+[1.318s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/cmake/marvin_descriptionConfig-version.cmake
+[1.319s] -- Installing: /home/iartes/marvinAutonomousTester/install/marvin_description/share/marvin_description/package.xml
+[1.322s] Invoked command in '/home/iartes/marvinAutonomousTester/build/marvin_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/iartes/chess_manipulator/install/chess_manipulator:/home/iartes/ws_moveit2/install/moveit_configs_utils:/home/iartes/ws_moveit2/install/launch_param_builder:/opt/ros/humble /usr/bin/cmake --install /home/iartes/marvinAutonomousTester/build/marvin_description

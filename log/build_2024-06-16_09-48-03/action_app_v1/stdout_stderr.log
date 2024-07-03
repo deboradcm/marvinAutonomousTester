@@ -1,0 +1,40 @@
+running egg_info
+creating ../../build/action_app_v1/action_app_v1.egg-info
+writing ../../build/action_app_v1/action_app_v1.egg-info/PKG-INFO
+writing dependency_links to ../../build/action_app_v1/action_app_v1.egg-info/dependency_links.txt
+writing entry points to ../../build/action_app_v1/action_app_v1.egg-info/entry_points.txt
+writing requirements to ../../build/action_app_v1/action_app_v1.egg-info/requires.txt
+writing top-level names to ../../build/action_app_v1/action_app_v1.egg-info/top_level.txt
+writing manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+reading manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/action_app_v1/action_app_v1.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/iartes/marvinAutonomousTester/build/action_app_v1/build
+creating /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib
+creating /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+copying action_app_v1/action_app_android_server.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+copying action_app_v1/__init__.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+copying action_app_v1/action_app_android_client.py -> /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1
+running install
+running install_lib
+creating /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+copying /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1/action_app_android_server.py -> /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+copying /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1/__init__.py -> /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+copying /home/iartes/marvinAutonomousTester/build/action_app_v1/build/lib/action_app_v1/action_app_android_client.py -> /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1
+byte-compiling /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1/action_app_android_server.py to action_app_android_server.cpython-310.pyc
+byte-compiling /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1/action_app_android_client.py to action_app_android_client.cpython-310.pyc
+running install_data
+creating /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index
+creating /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index
+creating /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index/packages
+copying resource/action_app_v1 -> /home/iartes/marvinAutonomousTester/install/action_app_v1/share/ament_index/resource_index/packages
+copying package.xml -> /home/iartes/marvinAutonomousTester/install/action_app_v1/share/action_app_v1
+running install_egg_info
+Copying ../../build/action_app_v1/action_app_v1.egg-info to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/python3.10/site-packages/action_app_v1-0.0.0-py3.10.egg-info
+running install_scripts
+Installing action_app_android_client script to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/action_app_v1
+Installing action_app_android_server script to /home/iartes/marvinAutonomousTester/install/action_app_v1/lib/action_app_v1
+writing list of installed files to '/home/iartes/marvinAutonomousTester/build/action_app_v1/install.log'

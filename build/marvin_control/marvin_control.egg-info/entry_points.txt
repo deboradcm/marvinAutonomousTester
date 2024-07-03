@@ -1,0 +1,2 @@
+[console_scripts]
+marvin_controller = marvin_control.marvin_controller:main

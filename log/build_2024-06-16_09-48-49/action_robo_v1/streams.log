@@ -1,0 +1,28 @@
+[2.229s] Invoking command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_robo_v1': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_robo_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_robo_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_robo_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_robo_v1/install.log --single-version-externally-managed install_data
+[2.535s] running egg_info
+[2.555s] writing ../../build/action_robo_v1/action_robo_v1.egg-info/PKG-INFO
+[2.556s] writing dependency_links to ../../build/action_robo_v1/action_robo_v1.egg-info/dependency_links.txt
+[2.556s] writing entry points to ../../build/action_robo_v1/action_robo_v1.egg-info/entry_points.txt
+[2.556s] writing requirements to ../../build/action_robo_v1/action_robo_v1.egg-info/requires.txt
+[2.556s] writing top-level names to ../../build/action_robo_v1/action_robo_v1.egg-info/top_level.txt
+[2.595s] reading manifest file '../../build/action_robo_v1/action_robo_v1.egg-info/SOURCES.txt'
+[2.595s] adding license file 'LICENSE'
+[2.596s] writing manifest file '../../build/action_robo_v1/action_robo_v1.egg-info/SOURCES.txt'
+[2.596s] running build
+[2.596s] running build_py
+[2.596s] copying action_robo_v1/__init__.py -> /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[2.596s] copying action_robo_v1/robo_action_server.py -> /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[2.596s] copying action_robo_v1/robo_action_client.py -> /home/iartes/marvinAutonomousTester/build/action_robo_v1/build/lib/action_robo_v1
+[2.597s] running install
+[2.604s] running install_lib
+[2.624s] running install_data
+[2.624s] copying resource/action_robo_v1 -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/ament_index/resource_index/packages
+[2.624s] copying package.xml -> /home/iartes/marvinAutonomousTester/install/action_robo_v1/share/action_robo_v1
+[2.624s] running install_egg_info
+[2.645s] removing '/home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1-0.0.0-py3.10.egg-info' (and everything under it)
+[2.645s] Copying ../../build/action_robo_v1/action_robo_v1.egg-info to /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages/action_robo_v1-0.0.0-py3.10.egg-info
+[2.645s] running install_scripts
+[2.745s] Installing robo_action_client script to /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/action_robo_v1
+[2.745s] Installing robo_action_server script to /home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/action_robo_v1
+[2.745s] writing list of installed files to '/home/iartes/marvinAutonomousTester/build/action_robo_v1/install.log'
+[2.768s] Invoked command in '/home/iartes/marvinAutonomousTester/comunicacao_android_ros2/action_robo_v1' returned '0': PYTHONPATH=/home/iartes/marvinAutonomousTester/build/action_robo_v1/prefix_override:/home/iartes/marvinAutonomousTester/install/action_robo_v1/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/action_robo_v1 build --build-base /home/iartes/marvinAutonomousTester/build/action_robo_v1/build install --record /home/iartes/marvinAutonomousTester/build/action_robo_v1/install.log --single-version-externally-managed install_data

@@ -1,0 +1,22 @@
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/launch/inRviz.launch.py
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/launch/marvin_launch.py
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/urdf/ur3e_robotiq_2f_85_urdf.xacro
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/urdf/ur3e_urdf.xacro
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/urdf/ur3e_urdf (copy).xacro
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/urdf/robotiq_2f_85_urdf.xacro
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/worlds/marvin.world
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/ament_index/resource_index/package_run_dependencies/marvin_bringup
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/ament_index/resource_index/parent_prefix_path/marvin_bringup
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/environment/ament_prefix_path.sh
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/environment/ament_prefix_path.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/environment/path.sh
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/environment/path.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/local_setup.bash
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/local_setup.sh
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/local_setup.zsh
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/local_setup.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/package.dsv
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/ament_index/resource_index/packages/marvin_bringup
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/cmake/marvin_bringupConfig.cmake
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/cmake/marvin_bringupConfig-version.cmake
+/home/iartes/marvinAutonomousTester/install/marvin_bringup/share/marvin_bringup/package.xml
