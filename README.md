@@ -54,3 +54,8 @@ cd ~/marvinAutonomousTester/ros2_marvin/
 colcon build 
 source install/setup.bash
 ros2 launch ur_simulation_gazebo ur_sim_control.launch.py ur_type:=ur3
+```
+Se o modelo do Phone não estiver aparecendo, clique na guia "Insert" no canto superior esquerdo do gazebo. Em seguida clique em Phone então clique próximo ao manipulador pra posicionar o modelo, em seguida retorne para a guia World. Para posicionar com mais exatidão o modelo na simulação clique no nome Phone que está na guia World, e nas opções de pose insira algo próximo dos valores de x = -0,08 y= 0,54 z= 0,10.
+
+
+
