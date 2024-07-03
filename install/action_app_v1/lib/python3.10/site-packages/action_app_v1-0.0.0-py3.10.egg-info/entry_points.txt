@@ -1,3 +1,0 @@
-[console_scripts]
-action_app_android_client = action_app_v1.action_app_android_client:main
-action_app_android_server = action_app_v1.action_app_android_server:main

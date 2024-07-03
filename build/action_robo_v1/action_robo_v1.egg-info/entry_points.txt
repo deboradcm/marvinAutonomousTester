@@ -1,3 +1,0 @@
-[console_scripts]
-robo_action_client = action_robo_v1.robo_action_client:main
-robo_action_server = action_robo_v1.robo_action_server:main
