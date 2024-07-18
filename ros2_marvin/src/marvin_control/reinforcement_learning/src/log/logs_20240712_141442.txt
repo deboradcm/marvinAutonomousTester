@@ -1,0 +1,5 @@
+07/12/2024 02:14:48 PM Posição do botão gerada: (0.5357620001643146, 0.016797447120310283, 0.1)
+07/12/2024 02:14:48 PM Ambiente inicializado.
+07/12/2024 02:14:48 PM Algoritmo Q-Learning inicializado para o robô 1.
+07/12/2024 02:14:48 PM Robô 1 inicializado.
+07/12/2024 02:14:48 PM Erro ao mover o robô: Nenhuma solução válida para as juntas foi encontrada para a posição fornecida.

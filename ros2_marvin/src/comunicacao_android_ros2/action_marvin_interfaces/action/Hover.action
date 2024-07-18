@@ -1,20 +1,23 @@
 # Request
 string message
-int16 initial_x
-int16 initial_y
-int16 initial_z
-int16 final_x
-int16 final_y
-int16 final_z
+int16 id_robot
+float64 initial_x
+float64 initial_y
+float64 initial_z
+float64 final_x
+float64 final_y
+float64 final_z
 ---
 # Result
 string message
-int16 x
-int16 y
-int16 z
+int16 id_robot
+float64 x
+float64 y
+float64 z
 ---
 # Feedback
 string message
-int16 current_x
-int16 current_y
-int16 current_z
+float64 current_x
+float64 current_y
+float64 current_z
+

@@ -99,17 +99,17 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
 
     // Método para receber as coordenadas da interface
     @Override
-    public void onCoordinatesReceived(int x, int y, boolean inicio) {
+    public void onCoordinatesReceived(int x, int y, boolean inicio, int id_robot) {
         // Faça o que você precisa com as coordenadas recebidas, por exemplo:
         Log.d("MainActivity", "Coordenadas recebidas: x = " + x + ", y = " + y);
 
         // Verifique se as coordenadas atingem o botão, usando a lógica existente da MainActivity
         if (isTouchOnButton(sendButton, x, y)) {
             Log.d("MainActivity", "As coordenadas atingiram o botão");
-            enviarDadosParaServidor(true);
+            enviarDadosParaServidor(true, id_robot);
         } else {
             if (inicio == false){
-                enviarDadosParaServidor(false);
+                enviarDadosParaServidor(false, id_robot);
             }
             Log.d("MainActivity", "As coordenadas não atingiram o botão");
         }
@@ -127,21 +127,56 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
         return isOnButton;
     }
 
-    private void enviarDadosParaServidor(boolean sucesso) {
+    private void enviarDadosParaServidor(boolean inicio, int id_robot) {
         Log.d("MainActivity", "Enviando dados para o servidor MQTT.");
+        Log.d("MainActivity", "Clique manual detectado. Enviando dados para o servidor MQTT.");
         try {
-            Retorno retorno = new Retorno();
-            retorno.setRetorno(sucesso ? "true" : "false");
+            /*Evento evento = new Evento();
+            evento.setEvento("clique");
 
+            // Obtém as coordenadas do botão
+            int x = (int) sendButton.getX();
+            int y = (int) sendButton.getY();
+
+            // Preenche as coordenadas no objeto Dados
+            Dados dados = new Dados();
+            dados.setX(x);
+            dados.setY(y);
+
+            evento.setDados(dados);*/
+
+            Retorno retorno = new Retorno();
+            if (inicio == true) {
+                retorno.setRetorno("true");
+            } else{
+                retorno.setRetorno("false");
+            }
+
+            retorno.setId_robot(id_robot)
+
+            // Converte a instância de Evento em JSON
             Gson gson = new Gson();
             String jsonRetorno = gson.toJson(retorno);
 
+            // Imprime o JSON no Logcat
+            Log.d("JSON", jsonRetorno);
+
+            // Obtém o caminho para o diretório de persistência de arquivos
             String persistencePath = getApplicationContext().getFilesDir().getAbsolutePath();
+
+            // Cria uma instância do cliente MQTT usando o caminho de persistência de arquivos personalizado
             MqttClient client = new MqttClient("tcp://broker.hivemq.com:1883", MqttClient.generateClientId(), new MqttDefaultFilePersistence(persistencePath));
+
+            // Conecta-se ao servidor MQTT
             client.connect();
 
+            // Cria uma mensagem MQTT com o JSON como payload
             MqttMessage message = new MqttMessage(jsonRetorno.getBytes());
+
+            // Publica a mensagem em um tópico MQTT
             client.publish("mqtt_topic", message);
+
+            // Desconecta do servidor MQTT após a publicação
             client.disconnect();
 
         } catch (MqttException e) {

@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'action_robo_v1'
+package_name = 'action_robo_v2'
 
 setup(
     name=package_name,
@@ -17,15 +17,15 @@ setup(
         'rclpy',
     ],
     zip_safe=True,
-    maintainer='iartes',
-    maintainer_email='bruna.mariana@icomp.ufam.edu.br',
+    maintainer='equipe01',
+    maintainer_email='debora.medeiros@icomp.ufam.edu.br',
     description='TODO: Package description',
-    license='Apache-2.0',
+    license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'robo_action_server  = action_robo_v1.robo_action_server:main',
-            'robo_action_client  = action_robo_v1.robo_action_client:main'
+            'action_robo_server  = action_robo_v2.action_robo_server:main',
+            'action_robo_client  = action_robo_v2.action_robo_client:main'
         ],
     },
 )

@@ -16,6 +16,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class MQTTSubscriber {
     private CoordinatesListener coordinatesListener;
+    private CoordinateConverter coordinate_converter;
     private static final String BROKER_URL = "tcp://broker.hivemq.com:1883"; // Endereço do servidor MQTT
     private static final String TOPIC = "hover_data"; // Tópico MQTT que desejo assinar
 
@@ -69,21 +70,30 @@ public class MQTTSubscriber {
                     String message_ = payloadMap.get("message");
                     String currentX = payloadMap.get("current_x");
                     String currentY = payloadMap.get("current_y");
+                    String currentZ = payloadMap.get("current_z");
+                    String id_robot = payloadMap.get("id_robot");
 
                     // Faça o que você precisa com os valores
                     System.out.println("Message: " + message_);
+                    System.out.println("id_robot: " + id_robot);
                     System.out.println("Current X: " + currentX);
                     System.out.println("Current Y: " + currentY);
+                    System.out.println("Current Z: " + currentZ);
+
+                    //Converter as coordenadas
+                    coordinate_converter = new CoordinateConverter(currentX, currentY, currentZ);
+                    int[] pixelCoords = converter.convertToPixelCoordinates();
+                    System.out.println("Pixel Coordinates: x=" + pixelCoords[0] + ", y=" + pixelCoords[1]);
 
                     if ("starting".equals(message_)) {
                         // Notifica a MainActivity sobre as coordenadas recebidas
                         if (coordinatesListener != null) {
-                            coordinatesListener.onCoordinatesReceived(Integer.parseInt(currentX), Integer.parseInt(currentY), true);
+                            coordinatesListener.onCoordinatesReceived(Integer.parseInt(pixelCoords[0]), Integer.parseInt(pixelCoords[1]), true, Integer.parseInt(id_robot));
                         }
                     } else if ("finish".equals(message_)) {
                         // Notifica a MainActivity sobre as coordenadas recebidas
                         if (coordinatesListener != null) {
-                            coordinatesListener.onCoordinatesReceived(Integer.parseInt(currentX), Integer.parseInt(currentY), false);
+                            coordinatesListener.onCoordinatesReceived(Integer.parseInt(currentX), Integer.parseInt(currentY), false, Integer.parseInt(id_robot));
                         }
                     }
                 }

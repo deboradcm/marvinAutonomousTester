@@ -1,0 +1,4 @@
+07/09/2024 08:11:48 PM Posição do botão gerada: (0.3984065869695944, 0.18875883520613906, 0.1)
+07/09/2024 08:11:48 PM Ambiente inicializado.
+07/09/2024 08:11:48 PM Algoritmo Q-Learning inicializado para o robô 1.
+07/09/2024 08:11:48 PM Robô 1 inicializado.

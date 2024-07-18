@@ -23,15 +23,27 @@ class HoverActionClient(Node):
         self._mqtt_client.connect(self.broker_address, 1883)'''
 
 
-    def send_goal(self, initial_x, initial_y, initial_z, final_x, final_y, final_z): #alguns projetos usam esse metodo como assincrono, é necessario?
+    def send_goal(self, id_robot, initial_x, initial_y, initial_z, final_x, final_y, final_z): #alguns projetos usam esse metodo como assincrono, é necessario?
+    
+        print(f'Input values: id_robot={id_robot}, initial_x={initial_x} ({type(initial_x)}), initial_y={initial_y} ({type(initial_y)}), initial_z={initial_z} ({type(initial_z)}), final_x={final_x} ({type(final_x)}), final_y={final_y} ({type(final_y)}), final_z={final_z} ({type(final_z)})')
+         
         goal_msg = Hover.Goal()
         goal_msg.message = 'hover'
-        goal_msg.initial_x = initial_x
+        goal_msg.id_robot = id_robot
+        '''goal_msg.initial_x = float(initial_x) #Débora: converti para float
+        goal_msg.initial_y = float(initial_y)
+        goal_msg.initial_z = float(initial_z)
+        goal_msg.final_x = float(final_x)
+        goal_msg.final_y = float(final_y)
+        goal_msg.final_z = float(final_z)'''
+        goal_msg.initial_x = initial_x #Débora: converti para float
         goal_msg.initial_y = initial_y
         goal_msg.initial_z = initial_z
         goal_msg.final_x = final_x
         goal_msg.final_y = final_y
         goal_msg.final_z = final_z
+        
+        print(f'Converted values: initial_x={initial_x} ({type(initial_x)}), initial_y={initial_y} ({type(initial_y)}), initial_z={initial_z} ({type(initial_z)}), final_x={final_x} ({type(final_x)}), final_y={final_y} ({type(final_y)}), final_z={final_z} ({type(final_z)})')
 
         self._action_client.wait_for_server()
         self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
@@ -50,15 +62,7 @@ class HoverActionClient(Node):
 
     def get_result_callback(self, future):
         result = future.result().result
-        self.get_logger().info('Result: {0} - x: {1}, y: {2}'.format(result.message, result.x, result.y))
-
-        '''# Publicar o resultado no tópico MQTT
-        hover_data = {
-            "message": result.message,
-            "x": result.x,
-            "y": result.y
-        }
-        self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())'''
+        self.get_logger().info('Result: {0},  id_robot: {1} - x: {2}, y: {3}, z: {4}'.format(result.message, result.id_robot, result.x, result.y, result.z))
 
         rclpy.shutdown()
 
@@ -68,9 +72,9 @@ class HoverActionClient(Node):
 def main(args=None):
     rclpy.init(args=args)
     hover_action_client = HoverActionClient()
-    hover_action_client.send_goal(100, 120, 180, 200, 220, 280)
     rclpy.spin(hover_action_client)
     #rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
+
