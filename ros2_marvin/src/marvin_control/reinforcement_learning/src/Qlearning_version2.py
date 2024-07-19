@@ -12,11 +12,29 @@ from tabulate import tabulate
 
 import rclpy.node
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))   
+# Adiciona o caminho do projeto ao sys.path
 
-from comunicacao_android_ros2.action_robo_v2.action_robo_v2.action_robo_client import HoverActionClient
-import rclpy
-from marvin_control.marvin_controller import ControllerRobot   
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.abspath(os.path.join(current_dir, '../../..'))
+action_robo_v2_dir = os.path.join(project_dir, 'comunicacao_android_ros2', 'action_robo_v2', 'action_robo_v2')
+
+# Adiciona o diretório correto ao sys.path
+sys.path.append(action_robo_v2_dir)
+
+print("sys.path:")
+for path in sys.path:
+    print(path)
+
+# Tenta importar após adicionar o caminho ao sys.path
+try:
+    from action_robo_v2.action_robo_client import HoverActionClient
+    print("Importação bem-sucedida!")
+except ModuleNotFoundError as e:
+    print(f"Erro de importação: {e}")
+
+#from comunicacao_android_ros2.action_robo_v2.action_robo_client import HoverActionClient
+#import rclpy
+from marvin_control.marvin_controller import ControllerRobot
 
 
 # Configura o logging
