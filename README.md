@@ -66,10 +66,10 @@ pip install paho-mqtt
 colcon build 
 
 1. action client enviando dados de coordenadas falsas:
-ros2 run action_robo_v1 robo_action_client
+ros2 run action_robo_v2 action_robo_client
 
 2. Server action recebendo os dados:
-ros2 run action_robo_v1 robo_action_server
+ros2 run action_robo_v2 action_robo_server
 
 3. topico criado em contato com o MQTT:
 ros2 run mqtt_publish mqtt_publish
