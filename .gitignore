@@ -3,3 +3,5 @@
 /ros2_marvin/log/
 .idea/
 ./testAppMarvin/.idea
+__pycache__/
+
