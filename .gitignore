@@ -1,3 +1,5 @@
 /ros2_marvin/build/
 /ros2_marvin/install/
 /ros2_marvin/log/
+.idea/
+./testAppMarvin/.idea
