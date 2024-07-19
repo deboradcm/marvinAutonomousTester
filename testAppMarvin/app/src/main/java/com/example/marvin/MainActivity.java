@@ -15,11 +15,25 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.gson.Gson;
+
 import java.util.Random;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements CoordinatesListener{
+    private boolean cliqueManual = false;
+    private int randomCornerButton1X;
+    private int randomCornerButton1Y;
+    private int randomCornerButton1Width;
+    private int randomCornerButton1Height;
+    private int wandering1X;
+    //private int randomCornerButton1Y;
+    //private int randomCornerButton1Width;
+    //private int randomCornerButton1Height;
+    //private int randomCornerButton1X;
+    //private int randomCornerButton1Y;
+    //private int randomCornerButton1Width;
+    //private int randomCornerButton1Height;
     private Button wandering1;
     private Button wandering2;
     private Button wandering3;
@@ -29,8 +43,19 @@ public class MainActivity extends AppCompatActivity {
     private Button topRightButton;
     private Button bottomLeftButton;
     private Button bottomRightButton;
-
     private Button randomCornerButton1;
+
+    private int virtualClickCount = 0;
+    private int wandering1ClickCount = 0;
+    private int wandering2ClickCount = 0;
+    private int wandering3ClickCount = 0;
+    private int northButtonClickCount = 0;
+    private int southButtonClickCount = 0;
+    private int topLeftButtonClickCount = 0;
+    private int topRightButtonClickCount = 0;
+    private int bottomLeftButtonClickCount = 0;
+    private int bottomRightButtonClickCount = 0;
+    private int randomCornerButton1ClickCount = 0;
 
 
     @Override
@@ -40,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicia a assinatura do tópico MQTT
         MQTTSubscriber subscriber = new MQTTSubscriber();
+        subscriber.setCoordinatesListener(this); // Configura a MainActivity como ouvinte de coordenadas
         subscriber.start();
 
         wandering1 = findViewById(R.id.wandering1);
@@ -64,6 +90,154 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Método para receber as coordenadas da interface
+    @Override
+    public void onCoordinatesReceived(int x, int y, boolean inicio, int id_robot) {
+        // Faça o que você precisa com as coordenadas recebidas, por exemplo:
+        Log.d("MainActivity", "Coordenadas recebidas: x = " + x + ", y = " + y);
+
+        // Verifique se as coordenadas atingem o botão, usando a lógica existente da MainActivity
+        /*if (isTouchOnButton(sendButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão");
+            enviarDadosParaServidor(true, id_robot);
+            virtualClickCount++;
+
+            if (virtualClickCount >=2){
+                moveButtonRandomly(sendButton);
+                virtualClickCount = 0;
+            }
+
+        } else */
+        if (ButtonBorder.isTouchOnButton(x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão wandering1");
+            enviarDadosParaServidor(true, id_robot);
+            wandering1ClickCount++;
+            if (wandering1ClickCount >= 2) {
+                moveButtonRandomly(wandering1);
+                wandering1ClickCount = 0;
+            }
+       /* } else if (isTouchOnButton(wandering2, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão wandering2");
+            enviarDadosParaServidor(true, id_robot);
+            wandering2ClickCount++;
+            if (wandering2ClickCount >= 2) {
+                moveButtonRandomly(wandering2);
+                wandering2ClickCount = 0;
+            }
+        } else if (isTouchOnButton(wandering3, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão wandering3");
+            enviarDadosParaServidor(true, id_robot);
+            wandering3ClickCount++;
+            if (wandering3ClickCount >= 2) {
+                moveButtonRandomly(wandering3);
+                wandering3ClickCount = 0;
+            }
+        } else if (isTouchOnButton(northButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão northButton");
+            enviarDadosParaServidor(true, id_robot);
+            northButtonClickCount++;
+            if (northButtonClickCount >= 2) {
+                moveButtonRandomly(northButton);
+                northButtonClickCount = 0;
+            }
+        } else if (isTouchOnButton(southButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão southButton");
+            enviarDadosParaServidor(true, id_robot);
+            southButtonClickCount++;
+            if (southButtonClickCount >= 2) {
+                moveButtonRandomly(southButton);
+                southButtonClickCount = 0;
+            }
+        } else if (isTouchOnButton(topLeftButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão topLeftButton");
+            enviarDadosParaServidor(true, id_robot);
+            topLeftButtonClickCount++;
+            if (topLeftButtonClickCount >= 2) {
+                moveButtonRandomly(topLeftButton);
+                topLeftButtonClickCount = 0;
+            }
+        } else if (isTouchOnButton(topRightButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão topRightButton");
+            enviarDadosParaServidor(true, id_robot);
+            topRightButtonClickCount++;
+            if (topRightButtonClickCount >= 2) {
+                moveButtonRandomly(topRightButton);
+                topRightButtonClickCount = 0;
+            }
+        } else if (isTouchOnButton(bottomLeftButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão bottomLeftButton");
+            enviarDadosParaServidor(true, id_robot);
+            bottomLeftButtonClickCount++;
+            if (bottomLeftButtonClickCount >= 2) {
+                moveButtonRandomly(bottomLeftButton);
+                bottomLeftButtonClickCount = 0;
+            }
+        } else if (isTouchOnButton(bottomRightButton, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão bottomRightButton");
+            enviarDadosParaServidor(true, id_robot);
+            bottomRightButtonClickCount++;
+            if (bottomRightButtonClickCount >= 2) {
+                moveButtonRandomly(bottomRightButton);
+                bottomRightButtonClickCount = 0;
+            }
+        } else if (isTouchOnButton(randomCornerButton1, x, y)) {
+            Log.d("MainActivity", "As coordenadas atingiram o botão randomCornerButton1");
+            enviarDadosParaServidor(true, id_robot);
+            randomCornerButton1ClickCount++;
+            if (randomCornerButton1ClickCount >= 2) {
+                moveButtonRandomly(randomCornerButton1);
+                randomCornerButton1ClickCount = 0;
+            }
+        } */}else {
+            if (inicio == false){
+                enviarDadosParaServidor(false, id_robot);
+            }
+            Log.d("MainActivity", "As coordenadas não atingiram o botão");
+        }
+    }
+
+     private void enviarDadosParaServidor(boolean inicio, int id_robot) {
+        Log.d("MainActivity", "Enviando dados para o servidor MQTT.");
+        Log.d("MainActivity", "Clique manual detectado. Enviando dados para o servidor MQTT.");
+        try {
+            Retorno retorno = new Retorno();
+            if (inicio == true) {
+                retorno.setRetorno("true");
+            } else{
+                retorno.setRetorno("false");
+            }
+
+            retorno.setId_robot(id_robot);
+
+            // Converte a instância de Evento em JSON
+            Gson gson = new Gson();
+            String jsonRetorno = gson.toJson(retorno);
+
+            // Imprime o JSON no Logcat
+            Log.d("JSON", jsonRetorno);
+
+            // Obtém o caminho para o diretório de persistência de arquivos
+            String persistencePath = getApplicationContext().getFilesDir().getAbsolutePath();
+
+            // Cria uma instância do cliente MQTT usando o caminho de persistência de arquivos personalizado
+            MqttClient client = new MqttClient("tcp://broker.hivemq.com:1883", MqttClient.generateClientId(), new MqttDefaultFilePersistence(persistencePath));
+
+            // Conecta-se ao servidor MQTT
+            client.connect();
+
+            // Cria uma mensagem MQTT com o JSON como payload
+            MqttMessage message = new MqttMessage(jsonRetorno.getBytes());
+
+            // Publica a mensagem em um tópico MQTT
+            client.publish("mqtt_topic", message);
+
+            // Desconecta do servidor MQTT após a publicação
+            client.disconnect();
+
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void sendDataToServer(String evento, int x, int y, String buttonTag) {
         try {
@@ -181,6 +355,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static final int TOUCH_SLOP = 20;
+
+    private void moveButtonRandomly(Button button) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
+
+        int buttonWidth = button.getWidth();
+        int buttonHeight = button.getHeight();
+
+        int margin = 100; // Margem de 100 pixels em todas as direções
+
+        int randomX = (int) (Math.random() * (screenWidth - buttonWidth - 2 * margin) + margin);
+        int randomY = (int) (Math.random() * (screenHeight - buttonHeight - 2 * margin) + margin);
+
+        button.setX(randomX);
+        button.setY(randomY);
+
+       /* if (button == sendButton) {
+            // Atualiza as coordenadas do botão
+            sendButtonX = (int) button.getX();
+            sendButtonY = (int) button.getY();
+            sendButtonWidth = button.getWidth();
+            sendButtonHeight = button.getHeight();
+        }*/
+    }
 
 
 }

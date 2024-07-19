@@ -69,9 +69,9 @@ class HoverActionServer(Node):
         self.get_logger().info(f'{distance_z}')
         # Define o número de passos e o tamanho do passo para cada eixo
         num_steps = 5
-        step_size_x = distance_x // num_steps
-        step_size_y = distance_y // num_steps
-        step_size_z = distance_z // num_steps
+        step_size_x = distance_x / num_steps
+        step_size_y = distance_y / num_steps
+        step_size_z = distance_z / num_steps
 
         for step in range(num_steps):
             # Verifica se um toque foi recebido (condição de parada)
@@ -114,7 +114,7 @@ class HoverActionServer(Node):
             
             self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())
 
-            rclpy.spin_once(self, timeout_sec=2)  # Aguarda 2 segundos entre os passos
+            rclpy.spin_once(self, timeout_sec=1)  # Aguarda 1 segundos entre os passos
 
         # Indica que o objetivo foi alcançado com sucesso
         goal_handle.succeed()

@@ -4,12 +4,17 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.util.Log;
 
 import java.util.Random;
 
 public class ButtonBottomRight {
     private static int clickCount = 0;
     private static int clickGeneralCount = 0;
+    private static int bottomRightButtonX;
+    private static int bottomRightButtonY;
+    private static int bottomRightButtonWidth;
+    private static int bottomRightButtonHeight;
 
 
     public static void setupRandomMoveOnClick(final Button button, final WindowManager windowManager, final Button replacementButton, MainActivity mainActivity) {
@@ -52,6 +57,19 @@ public class ButtonBottomRight {
 
             }
         });
+        // Adiciona OnLayoutChangeListener para monitorar mudanças no layout
+        button.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                int[] location = new int[2];
+                button.getLocationOnScreen(location);
+                bottomRightButtonX = location[0];
+                bottomRightButtonY = location[1];
+                bottomRightButtonWidth = right - left;
+                bottomRightButtonHeight = bottom - top;
+                Log.d("ButtonBottomRight", "Layout changed: X: " + bottomRightButtonX + ", Y: " + bottomRightButtonY + ", Width: " + bottomRightButtonWidth + ", Height: " + bottomRightButtonHeight);
+            }
+        });
     }
 
     private static void moveButtonRandomlyBottomRight(Button button, WindowManager windowManager) {
@@ -78,5 +96,21 @@ public class ButtonBottomRight {
         // Define as novas coordenadas para o botão
         button.setX(randomX);
         button.setY(randomY);
+
+        button.requestLayout();
+        button.invalidate();
+    }
+
+    public static boolean isTouchOnButton(int x, int y) {
+        Log.d("MainActivity", "Button coordinates: x = " + bottomRightButtonX + ", y = " + bottomRightButtonY + ", width = "+ bottomRightButtonWidth + ", height= "+ bottomRightButtonHeight);
+        Log.d("MainActivity", "Touch coordinates: x = " + x + ", y = " + y);
+
+        // Verifica se as coordenadas do toque estão dentro dos limites do botão
+        boolean isOnButton = x >= bottomRightButtonX && x <= bottomRightButtonX + bottomRightButtonWidth &&
+                y >= bottomRightButtonY && y <= bottomRightButtonY + bottomRightButtonHeight;
+
+        Log.d("MainActivity", "Is touch on button? " + isOnButton);
+
+        return isOnButton;
     }
 }

@@ -153,7 +153,6 @@ class TopicMQTT:
 
 
     def send_action_robot(self, robot_id, initial_x, initial_y, initial_z, final_x, final_y, final_z):
-        print('ho')
         command = (
             f'ros2 action send_goal /hover_action '
             f'action_marvin_interfaces/action/Hover '
@@ -167,12 +166,16 @@ class TopicMQTT:
 
     #Chama a action com a proxima trajetoria.
     def publicar_proxima_trajetoria(self, robot_id, trajetoria):
-        print('hi')
         self.send_action_robot(robot_id, trajetoria[0][0], trajetoria[0][1], trajetoria[0][2], trajetoria[1][0], trajetoria[1][1], trajetoria[1][2]) #TRAJETORIA DO PONTO A PARA O PONTO B
     
 def main():
     id_robot = 1
     TopicMQTT(id_robot)
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        print("Encerrando topico MQTT")
 
 if __name__ == "__main__":
     main()
