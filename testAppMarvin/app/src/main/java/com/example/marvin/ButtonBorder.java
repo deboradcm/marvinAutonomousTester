@@ -2,15 +2,16 @@ package com.example.marvin;
 
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-
 import java.util.Random;
 
 public class ButtonBorder {
 
-    private static int clickCount = 0;
+    private static int physicalClickCount = 0;
+    private static int virtualClickCount = 0;
     private static int clickGeneralCount = 0;
     private static int buttonBorderX;
     private static int buttonBorderY;
@@ -26,20 +27,19 @@ public class ButtonBorder {
         windowManager = wm;
         mainActivity = mainAct;
 
-        //Clique físico
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickCount++;
+                physicalClickCount++;
                 clickGeneralCount++;
 
-                if (clickCount == 2 && clickGeneralCount < 20) {
+                if (physicalClickCount == 2 && clickGeneralCount < 20) {
                     int x = (int) button.getX();
                     int y = (int) button.getY();
                     String buttonTag = (String) button.getTag();
                     moveButtonRandomlyBorder(button, windowManager);
-                    clickCount = 0;
-                } else if (clickCount < 2 && clickGeneralCount < 20) {
+                    physicalClickCount = 0;
+                } else if (physicalClickCount < 2 && clickGeneralCount < 20) {
                     int x = (int) button.getX();
                     int y = (int) button.getY();
                     String buttonTag = (String) button.getTag();
@@ -129,18 +129,31 @@ public class ButtonBorder {
 
         if (isTouchOnButton(x, y)) {
             Log.d("MainActivity", "As coordenadas atingiram o botão da borda");
-            mainActivity.enviarDadosParaServidor(true, id_robot); // Chama o método da MainActivity
-            clickCount++;
-            if (clickCount >= 2) {
-                moveButtonRandomlyBorder(button, windowManager); // Chama o método correto
-                clickCount = 0;
+            mainActivity.enviarDadosParaServidor(true, id_robot);
+            virtualClickCount++;
+            if (virtualClickCount >= 2) {
+                moveButtonRandomlyBorder(button, windowManager);
+                virtualClickCount = 0;
             }
+            button.performClick(); // Simula um clique virtual no botão
         } else {
             if (!inicio) {
-                mainActivity.enviarDadosParaServidor(false, id_robot); // Chama o método da MainActivity
+                mainActivity.enviarDadosParaServidor(false, id_robot);
             }
             Log.d("MainActivity", "As coordenadas não atingiram o botão");
         }
+        // Simula um clique virtual na coordenada recebida
+        simulateClick(x, y);
+    }
+
+    // Método para simular um clique virtual na coordenada fornecida
+    private static void simulateClick(int x, int y) {
+        MotionEvent downEvent = MotionEvent.obtain(System.currentTimeMillis(), System.currentTimeMillis(), MotionEvent.ACTION_DOWN, x, y, 0);
+        MotionEvent upEvent = MotionEvent.obtain(System.currentTimeMillis(), System.currentTimeMillis(), MotionEvent.ACTION_UP, x, y, 0);
+        mainActivity.dispatchTouchEvent(downEvent);
+        mainActivity.dispatchTouchEvent(upEvent);
+        downEvent.recycle();
+        upEvent.recycle();
     }
 
 }
