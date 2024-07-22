@@ -149,6 +149,7 @@ class TopicMQTT:
     def on_message(self, client, userdata, msg):
         print(msg.topic)
         print(msg)
+        msg = json.loads(msg.payload.decode()) #se nao funcionar, testar o json.dumps(msg) depois desse load
         try:
             if msg.topic == 'qlearning/q_table':
                 new_q_table = json.loads(msg.payload.decode())
