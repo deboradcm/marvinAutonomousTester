@@ -32,10 +32,6 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
     private Button wandering1;
 
 
-    private int clickCount = 0;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,30 +62,14 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
 
     }
 
-    // Método para receber as coordenadas da interface
     @Override
     public void onCoordinatesReceived(int x, int y, boolean inicio, int id_robot) {
-        // Faça o que você precisa com as coordenadas recebidas, por exemplo:
-        Log.d("MainActivity", "Coordenadas recebidas: x = " + x + ", y = " + y);
-
-        if (ButtonBorder.isTouchOnButton(x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão");
-            enviarDadosParaServidor(true, id_robot);
-            clickCount++;
-            if (clickCount >= 2) {
-                moveButtonRandomly(wandering1);
-                clickCount = 0;
-            }
-
-        }else {
-            if (inicio == false){
-                enviarDadosParaServidor(false, id_robot);
-            }
-            Log.d("MainActivity", "As coordenadas não atingiram o botão");
-        }
+        // Encaminha a lógica para ButtonBorder
+        ButtonBorder.onCoordinatesReceived(x, y, inicio, id_robot);
     }
 
-     private void enviarDadosParaServidor(boolean inicio, int id_robot) {
+
+     public void enviarDadosParaServidor(boolean inicio, int id_robot) {
         Log.d("MainActivity", "Enviando dados para o servidor MQTT.");
         Log.d("MainActivity", "Clique manual detectado. Enviando dados para o servidor MQTT.");
         try {
