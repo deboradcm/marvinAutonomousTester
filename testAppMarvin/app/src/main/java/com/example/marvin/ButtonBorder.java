@@ -37,8 +37,6 @@ public class ButtonBorder {
                     int y = (int) button.getY();
                     String buttonTag = (String) button.getTag();
 
-                    // Enviar dados para o servidor
-                    //mainActivity.sendDataToServer("click", x, y, buttonTag);
 
                     // movimenta o botão
                     moveButtonRandomlyBorder(button, windowManager);
@@ -51,8 +49,6 @@ public class ButtonBorder {
                     int y = (int) button.getY();
                     String buttonTag = (String) button.getTag();
 
-                    // Enviar dados para o servidor
-                   // mainActivity.sendDataToServer("click", x, y, buttonTag);
 
                 } if (clickGeneralCount > 20) {
                     button.setVisibility(View.GONE);
@@ -164,6 +160,8 @@ public class ButtonBorder {
 
         return isOnButton;
     }
+
+
 
 
 }
