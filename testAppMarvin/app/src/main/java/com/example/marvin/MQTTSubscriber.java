@@ -16,11 +16,20 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class MQTTSubscriber {
     private CoordinatesListener coordinatesListener;
-    private CoordinateConverter coordinate_converter;
+    private CoordinateConverter coordinateConverter;
     private static final String BROKER_URL = "tcp://broker.hivemq.com:1883"; // Endereço do servidor MQTT
     private static final String TOPIC = "hover_data"; // Tópico MQTT que desejo assinar
 
-    // Método para configurar o ouvinte de coordenadas
+    // Dimensões da tela como constantes
+    private static final double SCREEN_WIDTH_METERS = 0.062;
+    private static final double SCREEN_HEIGHT_METERS = 0.110;
+    private static final int SCREEN_WIDTH_PIXELS = 1080;
+    private static final int SCREEN_HEIGHT_PIXELS = 2220;
+
+    public MQTTSubscriber() {
+        this.coordinateConverter = new CoordinateConverter(SCREEN_WIDTH_METERS, SCREEN_HEIGHT_METERS, SCREEN_WIDTH_PIXELS, SCREEN_HEIGHT_PIXELS);
+    }
+
     public void setCoordinatesListener(CoordinatesListener listener) {
         this.coordinatesListener = listener;
     }
@@ -68,32 +77,23 @@ public class MQTTSubscriber {
 
                     // Acesse os valores do dicionário usando as chaves
                     String message_ = payloadMap.get("message");
-                    String currentX = payloadMap.get("current_x");
-                    String currentY = payloadMap.get("current_y");
-                    String currentZ = payloadMap.get("current_z");
-                    String id_robot = payloadMap.get("id_robot");
+                    double currentX = Double.parseDouble(payloadMap.get("current_x")); // Convertendo String para double
+                    double currentY = Double.parseDouble(payloadMap.get("current_y")); // Convertendo String para double
+                    String currentZ = payloadMap.get("current_z"); // Este valor não está sendo usado para conversão
+                    int id_robot = Integer.parseInt(payloadMap.get("id_robot"));
 
-                    // Faça o que você precisa com os valores
-                    System.out.println("Message: " + message_);
-                    System.out.println("id_robot: " + id_robot);
-                    System.out.println("Current X: " + currentX);
-                    System.out.println("Current Y: " + currentY);
-                    System.out.println("Current Z: " + currentZ);
-
-                    //Converter as coordenadas
-                    coordinate_converter = new CoordinateConverter(Double.parseDouble(currentX), Double.parseDouble(currentY), Double.parseDouble(currentZ));
-                    int[] pixelCoords = coordinate_converter.convertToPixelCoordinates();
+                    // Convertendo coordenadas
+                    int[] pixelCoords = coordinateConverter.convertMetersToPixels(currentX, currentY);
                     System.out.println("Pixel Coordinates: x=" + pixelCoords[0] + ", y=" + pixelCoords[1]);
 
+                    // Ações baseadas na mensagem
                     if ("starting".equals(message_)) {
-                        // Notifica a MainActivity sobre as coordenadas recebidas
                         if (coordinatesListener != null) {
-                            coordinatesListener.onCoordinatesReceived(pixelCoords[0], pixelCoords[1], true, Integer.parseInt(id_robot));
+                            coordinatesListener.onCoordinatesReceived(pixelCoords[0], pixelCoords[1], true, id_robot);
                         }
                     } else if ("finish".equals(message_)) {
-                        // Notifica a MainActivity sobre as coordenadas recebidas
                         if (coordinatesListener != null) {
-                            coordinatesListener.onCoordinatesReceived(Integer.parseInt(currentX), Integer.parseInt(currentY), false, Integer.parseInt(id_robot));
+                            coordinatesListener.onCoordinatesReceived(pixelCoords[0], pixelCoords[1], false, id_robot);
                         }
                     }
                 }
