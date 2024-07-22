@@ -21,41 +21,19 @@ import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity implements CoordinatesListener{
-    private boolean cliqueManual = false;
-    private int randomCornerButton1X;
-    private int randomCornerButton1Y;
-    private int randomCornerButton1Width;
-    private int randomCornerButton1Height;
-    private int wandering1X;
-    //private int randomCornerButton1Y;
-    //private int randomCornerButton1Width;
-    //private int randomCornerButton1Height;
-    //private int randomCornerButton1X;
-    //private int randomCornerButton1Y;
-    //private int randomCornerButton1Width;
-    //private int randomCornerButton1Height;
-    private Button wandering1;
-    private Button wandering2;
-    private Button wandering3;
+
+    private Button randomCornerButton1;
     private Button northButton;
     private Button southButton;
     private Button topLeftButton;
     private Button topRightButton;
     private Button bottomLeftButton;
     private Button bottomRightButton;
-    private Button randomCornerButton1;
+    private Button wandering1;
 
-    private int virtualClickCount = 0;
-    private int wandering1ClickCount = 0;
-    private int wandering2ClickCount = 0;
-    private int wandering3ClickCount = 0;
-    private int northButtonClickCount = 0;
-    private int southButtonClickCount = 0;
-    private int topLeftButtonClickCount = 0;
-    private int topRightButtonClickCount = 0;
-    private int bottomLeftButtonClickCount = 0;
-    private int bottomRightButtonClickCount = 0;
-    private int randomCornerButton1ClickCount = 0;
+
+    private int clickCount = 0;
+
 
 
     @Override
@@ -68,16 +46,14 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
         subscriber.setCoordinatesListener(this); // Configura a MainActivity como ouvinte de coordenadas
         subscriber.start();
 
-        wandering1 = findViewById(R.id.wandering1);
-        wandering2 = findViewById(R.id.wandering2);
-        wandering3 = findViewById(R.id.wandering3);
+        randomCornerButton1 = findViewById(R.id.randomCornerButton1);
         northButton = findViewById(R.id.northButton);
         southButton = findViewById(R.id.southButton);
         topLeftButton = findViewById(R.id.topLeftButton);
         topRightButton = findViewById(R.id.topRightButton);
         bottomLeftButton = findViewById(R.id.bottomLeftButton);
         bottomRightButton = findViewById(R.id.bottomRightButton);
-        randomCornerButton1 = findViewById(R.id.randomCornerButton1);
+        wandering1 = findViewById(R.id.wandering1);
 
         WindowManager windowManager = getWindowManager();
         ButtonBorder.setupRandomMoveOnClick(randomCornerButton1, windowManager, northButton, this );
@@ -96,99 +72,16 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
         // Faça o que você precisa com as coordenadas recebidas, por exemplo:
         Log.d("MainActivity", "Coordenadas recebidas: x = " + x + ", y = " + y);
 
-        // Verifique se as coordenadas atingem o botão, usando a lógica existente da MainActivity
-        /*if (isTouchOnButton(sendButton, x, y)) {
+        if (ButtonBorder.isTouchOnButton(x, y)) {
             Log.d("MainActivity", "As coordenadas atingiram o botão");
             enviarDadosParaServidor(true, id_robot);
-            virtualClickCount++;
-
-            if (virtualClickCount >=2){
-                moveButtonRandomly(sendButton);
-                virtualClickCount = 0;
-            }
-
-        } else */
-        if (ButtonBorder.isTouchOnButton(x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão wandering1");
-            enviarDadosParaServidor(true, id_robot);
-            wandering1ClickCount++;
-            if (wandering1ClickCount >= 2) {
+            clickCount++;
+            if (clickCount >= 2) {
                 moveButtonRandomly(wandering1);
-                wandering1ClickCount = 0;
+                clickCount = 0;
             }
-       /* } else if (isTouchOnButton(wandering2, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão wandering2");
-            enviarDadosParaServidor(true, id_robot);
-            wandering2ClickCount++;
-            if (wandering2ClickCount >= 2) {
-                moveButtonRandomly(wandering2);
-                wandering2ClickCount = 0;
-            }
-        } else if (isTouchOnButton(wandering3, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão wandering3");
-            enviarDadosParaServidor(true, id_robot);
-            wandering3ClickCount++;
-            if (wandering3ClickCount >= 2) {
-                moveButtonRandomly(wandering3);
-                wandering3ClickCount = 0;
-            }
-        } else if (isTouchOnButton(northButton, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão northButton");
-            enviarDadosParaServidor(true, id_robot);
-            northButtonClickCount++;
-            if (northButtonClickCount >= 2) {
-                moveButtonRandomly(northButton);
-                northButtonClickCount = 0;
-            }
-        } else if (isTouchOnButton(southButton, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão southButton");
-            enviarDadosParaServidor(true, id_robot);
-            southButtonClickCount++;
-            if (southButtonClickCount >= 2) {
-                moveButtonRandomly(southButton);
-                southButtonClickCount = 0;
-            }
-        } else if (isTouchOnButton(topLeftButton, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão topLeftButton");
-            enviarDadosParaServidor(true, id_robot);
-            topLeftButtonClickCount++;
-            if (topLeftButtonClickCount >= 2) {
-                moveButtonRandomly(topLeftButton);
-                topLeftButtonClickCount = 0;
-            }
-        } else if (isTouchOnButton(topRightButton, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão topRightButton");
-            enviarDadosParaServidor(true, id_robot);
-            topRightButtonClickCount++;
-            if (topRightButtonClickCount >= 2) {
-                moveButtonRandomly(topRightButton);
-                topRightButtonClickCount = 0;
-            }
-        } else if (isTouchOnButton(bottomLeftButton, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão bottomLeftButton");
-            enviarDadosParaServidor(true, id_robot);
-            bottomLeftButtonClickCount++;
-            if (bottomLeftButtonClickCount >= 2) {
-                moveButtonRandomly(bottomLeftButton);
-                bottomLeftButtonClickCount = 0;
-            }
-        } else if (isTouchOnButton(bottomRightButton, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão bottomRightButton");
-            enviarDadosParaServidor(true, id_robot);
-            bottomRightButtonClickCount++;
-            if (bottomRightButtonClickCount >= 2) {
-                moveButtonRandomly(bottomRightButton);
-                bottomRightButtonClickCount = 0;
-            }
-        } else if (isTouchOnButton(randomCornerButton1, x, y)) {
-            Log.d("MainActivity", "As coordenadas atingiram o botão randomCornerButton1");
-            enviarDadosParaServidor(true, id_robot);
-            randomCornerButton1ClickCount++;
-            if (randomCornerButton1ClickCount >= 2) {
-                moveButtonRandomly(randomCornerButton1);
-                randomCornerButton1ClickCount = 0;
-            }
-        } */}else {
+
+        }else {
             if (inicio == false){
                 enviarDadosParaServidor(false, id_robot);
             }
@@ -327,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
 
     private boolean isInsideButton(int x, int y) {
         // Verifica cada botão individualmente
-        if (isInsideView(x, y, wandering1) || isInsideView(x, y, wandering2) || isInsideView(x, y, wandering3) ||
+        if (isInsideView(x, y, wandering1) ||
                 isInsideView(x, y, northButton) || isInsideView(x, y, southButton) || isInsideView(x, y, topLeftButton) ||
                 isInsideView(x, y, topRightButton) || isInsideView(x, y, bottomLeftButton) || isInsideView(x, y, bottomRightButton) ||
                 isInsideView(x, y, randomCornerButton1)) {
@@ -373,13 +266,6 @@ public class MainActivity extends AppCompatActivity implements CoordinatesListen
         button.setX(randomX);
         button.setY(randomY);
 
-       /* if (button == sendButton) {
-            // Atualiza as coordenadas do botão
-            sendButtonX = (int) button.getX();
-            sendButtonY = (int) button.getY();
-            sendButtonWidth = button.getWidth();
-            sendButtonHeight = button.getHeight();
-        }*/
     }
 
 
