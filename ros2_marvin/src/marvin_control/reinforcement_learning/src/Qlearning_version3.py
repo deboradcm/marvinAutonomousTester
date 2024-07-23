@@ -110,6 +110,19 @@ class Robot:
         else:
             self.current_action = self.qlearning.epsilon_greedy_policy(self.current_state)
         return self.current_action
+    
+    def generate_new_actions(self):
+        # Exemplo de geração dinâmica de novas ações
+        acoes = []
+        for _ in range(10):  # Gere 10 trajetórias diferentes
+            start_x = random.uniform(-0.1, 0.1)
+            start_y = random.uniform(-0.1, 0.1)
+            start_z = random.uniform(0.0, 0.1)
+            end_x = start_x + random.uniform(-0.05, 0.05)
+            end_y = start_y + random.uniform(-0.05, 0.05)
+            end_z = start_z + random.uniform(-0.05, 0.05)
+            acoes.append(((start_x, start_y, start_z), (end_x, end_y, end_z)))
+        return acoes
 
 class TopicMQTT:
     def __init__(self, id_robot):
@@ -124,8 +137,18 @@ class TopicMQTT:
         self.client.loop_start()
         self.publicar_proxima_trajetoria(self.robot.robot_id, ((0.0, 0.0, 0.0), (0.05, 0.01, 0.0)))
 
-    def gerar_acoes(self):
-        return [((0.0, 0.0, 0.0), (0.05, 0.01, 0.0)), ((0.05, 0.01, 0), (0.07, 0.03, 0.0)), ((0.07, 0.03, 0.0), (0.09, 0.05, 0.0))]
+        def gerar_acoes(self):
+            # Gera ações de forma dinâmica para criar mais variações
+            acoes = []
+            for _ in range(10):  # Gere 10 trajetórias diferentes
+                start_x = random.uniform(-0.1, 0.1)
+                start_y = random.uniform(-0.1, 0.1)
+                start_z = random.uniform(0.0, 0.1)
+                end_x = start_x + random.uniform(-0.05, 0.05)
+                end_y = start_y + random.uniform(-0.05, 0.05)
+                end_z = start_z + random.uniform(-0.05, 0.05)
+                acoes.append(((start_x, start_y, start_z), (end_x, end_y, end_z)))
+            return acoes
 
     def on_connect(self, client, userdata, flags, rc):
         print("Connected to MQTT broker with result code %d." % rc)
