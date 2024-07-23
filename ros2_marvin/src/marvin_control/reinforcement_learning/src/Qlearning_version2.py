@@ -70,16 +70,18 @@ class QLearning:
     #Publica a Q-table atualizada no tópico MQTT.   
     def publish_q_table(self):
         if self.mqtt_client:
-            q_table_json = json.dumps(self.q_table)
+            q_table_serializable = {str(key): value for key, value in self.q_table.items()}
+            q_table_json = json.dumps(q_table_serializable)
             self.mqtt_client.publish('qlearning/q_table', q_table_json)
 
     #Mescla uma nova Q-table com a Q-table existente, escolhendo o maior valor Q para cada par estado-ação.
     def merge_q_table(self, new_q_table):
         for key, value in new_q_table.items():
-            if key in self.q_table:
-                self.q_table[key] = max(self.q_table[key], value)
+            key_tuple = eval(key)
+            if key_tuple in self.q_table:
+                self.q_table[key_tuple] = max(self.q_table[key_tuple], value)
             else:
-                self.q_table[key] = value
+                self.q_table[key_tuple] = value
 
     #Seleciona a melhor ação com base nos valores Q atuais para um dado estado.
     def direct_policy(self, state):
@@ -149,7 +151,7 @@ class TopicMQTT:
     def on_message(self, client, userdata, msg):
         print(msg.topic)
         print(msg)
-        msg = json.loads(msg.payload.decode()) #se nao funcionar, testar o json.dumps(msg) depois desse load
+        #msg = json.loads(msg.payload.decode()) #se nao funcionar, testar o json.dumps(msg) depois desse load
         try:
             if msg.topic == 'qlearning/q_table':
                 new_q_table = json.loads(msg.payload.decode())
