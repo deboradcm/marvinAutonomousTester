@@ -13,31 +13,23 @@ from tabulate import tabulate
 import rclpy.node
 
 # Adiciona o caminho do projeto ao sys.path
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.abspath(os.path.join(current_dir, '../../..'))
 action_robo_v2_dir = os.path.join(project_dir, 'comunicacao_android_ros2', 'action_robo_v2', 'action_robo_v2')
 
-# Adiciona o diretório correto ao sys.path
 sys.path.append(action_robo_v2_dir)
-
 print("sys.path:")
 for path in sys.path:
     print(path)
-
-# Tenta importar após adicionar o caminho ao sys.path
 try:
     from action_robo_v2.action_robo_client import HoverActionClient
     print("Importação bem-sucedida!")
 except ModuleNotFoundError as e:
     print(f"Erro de importação: {e}")
 
-#from comunicacao_android_ros2.action_robo_v2.action_robo_client import HoverActionClient
-#import rclpy
 from marvin_control.marvin_controller import ControllerRobot
 
-
-# Configura o logging
+# Configuração do Logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -46,7 +38,6 @@ BUTTON_PRESSED_REWARD = 100
 DEFAULT_REWARD = -1
 
 class QLearning:
-    #Inicializa o algoritmo Q-Learning com parâmetros de aprendizado e uma lista de ações possíveis. Também inicializa a Q-table.
     def __init__(self, actions, alpha=0.1, gamma=0.9, epsilon=0.1, mqtt_client=None): 
         self.q_table = {}
         self.actions = actions
@@ -55,11 +46,9 @@ class QLearning:
         self.epsilon = epsilon
         self.mqtt_client = mqtt_client  
     
-    #Obtém o valor Q para um par estado-ação da Q-table. Retorna 0.0 se o par não estiver na tabela.
     def get_q_value(self, state, action):
         return self.q_table.get((state, action), 0.0)
     
-    #Atualiza o valor Q para um par estado-ação com base na recompensa recebida e no valor futuro esperado. Publica a Q-table atualizada via MQTT.
     def update_q_value(self, state, action, reward, next_state): 
         old_q_value = self.get_q_value(state, action)
         future_q_values = [self.get_q_value(next_state, a) for a in self.actions]
@@ -67,14 +56,12 @@ class QLearning:
         self.q_table[(state, action)] = new_q_value
         self.publish_q_table()
 
-    #Publica a Q-table atualizada no tópico MQTT.   
     def publish_q_table(self):
         if self.mqtt_client:
             q_table_serializable = {str(key): value for key, value in self.q_table.items()}
             q_table_json = json.dumps(q_table_serializable)
             self.mqtt_client.publish('qlearning/q_table', q_table_json)
 
-    #Mescla uma nova Q-table com a Q-table existente, escolhendo o maior valor Q para cada par estado-ação.
     def merge_q_table(self, new_q_table):
         for key, value in new_q_table.items():
             key_tuple = eval(key)
@@ -83,50 +70,48 @@ class QLearning:
             else:
                 self.q_table[key_tuple] = value
 
-    #Seleciona a melhor ação com base nos valores Q atuais para um dado estado.
     def direct_policy(self, state):
         q_values = [self.get_q_value(state, action) for action in self.actions]
         max_q = max(q_values)
         return self.actions[q_values.index(max_q)]
 
-    #Seleciona uma ação aleatória com probabilidade epsilon, e a melhor ação com probabilidade 1-epsilon.
     def epsilon_greedy_policy(self, state):
         if random.uniform(0, 1) < self.epsilon:
             return random.choice(self.actions)
         else:
             return self.direct_policy(state)
-        
+
 class Robot:
     def __init__(self, robot_id, actions, qlearning):
         self.robot_id = robot_id
         self.actions = actions
         self.qlearning = qlearning
-        self.current_state = None #Armazena o estado atual do robô.
-        self.current_action = None #Armazena a ação atual do robô
+        self.current_state = None
+        self.current_action = None
         self.controller = ControllerRobot()
-        #self.robot_current = None 
-    
-    def coordenada_robo(self, x, y, z, reward): #Atualiza o estado atual do robô com as coordenadas fornecidas e a recompensa recebida. Atualiza o valor Q correspondente
+
+    def coordenada_robo(self, x, y, z, reward):
         next_state = (x, y, z)
         self.qlearning.update_q_value(self.current_state, self.current_action, reward, next_state)
         self.current_state = next_state
-        joint_angles = self.controller.calculate_joint_angles(x, y, z)
-        self.controller.send_joint_angles_to_robot(joint_angles)
-        #self.robot_current = id_robot
+        try:
+            joint_angles = self.controller.calculate_joint_angles(x, y, z)  # Passando x, y e z
+            self.controller.send_joint_angles_to_robot(joint_angles)
+        except ValueError as e:
+            print(e)
 
-    def trajetoria_robo(self, xa, ya, za, xb, yb, zb, reward): #Atualiza o valor Q para uma trajetória fornecida e define o estado atual como o estado final da trajetória.
+    def trajetoria_robo(self, xa, ya, za, xb, yb, zb, reward):
         self.qlearning.update_q_value(self.current_state, self.current_action, reward, (xb, yb, zb))
         self.current_state = (xb, yb, zb)
 
-    def escolher_proxima_trajetoria(self, use_direct_policy=False): #Escolhe a próxima trajetória a ser seguida pelo robô usando a política direta ou a política epsilon-greedy.
+    def escolher_proxima_trajetoria(self, use_direct_policy=False):
         if use_direct_policy:
             self.current_action = self.qlearning.direct_policy(self.current_state)
         else:
             self.current_action = self.qlearning.epsilon_greedy_policy(self.current_state)
         return self.current_action
-    
+
 class TopicMQTT:
-    #Inicializa a classe MQTT, cria instâncias de Robot e QLearning, e configura conexões e subscrições MQTT.
     def __init__(self, id_robot):
         self.client = mqtt.Client()
         self.qlearning = QLearning(actions=self.gerar_acoes(), mqtt_client=self.client)
@@ -137,21 +122,17 @@ class TopicMQTT:
         self.client.subscribe('hover_data')
         self.client.subscribe('qlearning/q_table')
         self.client.loop_start()
-        self.publicar_proxima_trajetoria(self.robot.robot_id, [[0.0, 0.0, 0.0], [0.05, 0.01, 0.0]])
+        self.publicar_proxima_trajetoria(self.robot.robot_id, ((0.0, 0.0, 0.0), (0.05, 0.01, 0.0)))
 
-    #Gera uma lista de ações possíveis (trajetórias).
     def gerar_acoes(self):
-        return [((0.0, 0.0, 0.0), (0.05, 0.01, 0.0)), ((0.05, 0.01, 0), (0.07, 0.03, 0.0)), ((0.07, 0.03, 0.0), (0.09, 0.05, 0.0))] #vamos inicializar conforme quisermos
+        return [((0.0, 0.0, 0.0), (0.05, 0.01, 0.0)), ((0.05, 0.01, 0), (0.07, 0.03, 0.0)), ((0.07, 0.03, 0.0), (0.09, 0.05, 0.0))]
 
-    #Callback chamado quando a conexão com o broker MQTT é estabelecida.
     def on_connect(self, client, userdata, flags, rc):
         print("Connected to MQTT broker with result code %d." % rc)
 
-    #Callback chamado quando uma mensagem é recebida. Atualiza a Q-table ou o estado do robô, dependendo do tópico da mensagem.
     def on_message(self, client, userdata, msg):
         print(msg.topic)
         print(msg)
-        #msg = json.loads(msg.payload.decode()) #se nao funcionar, testar o json.dumps(msg) depois desse load
         try:
             if msg.topic == 'qlearning/q_table':
                 new_q_table = json.loads(msg.payload.decode())
@@ -172,7 +153,6 @@ class TopicMQTT:
         except Exception as e:
             print("Error parsing MQTT message: %s" % str(e))
 
-
     def send_action_robot(self, robot_id, initial_x, initial_y, initial_z, final_x, final_y, final_z):
         command = (
             f'ros2 action send_goal /hover_action '
@@ -180,15 +160,12 @@ class TopicMQTT:
             f'"{{id_robot: {robot_id}, initial_x: {initial_x}, initial_y: {initial_y}, initial_z: {initial_z}, '
             f'final_x: {final_x}, final_y: {final_y}, final_z: {final_z}}}"'
         )
-    
         print(f"Executando comando: {command}")
         subprocess.run(command, shell=True, check=True)
 
-
-    #Chama a action com a proxima trajetoria.
     def publicar_proxima_trajetoria(self, robot_id, trajetoria):
-        self.send_action_robot(robot_id, trajetoria[0][0], trajetoria[0][1], trajetoria[0][2], trajetoria[1][0], trajetoria[1][1], trajetoria[1][2]) #TRAJETORIA DO PONTO A PARA O PONTO B
-    
+        self.send_action_robot(robot_id, trajetoria[0][0], trajetoria[0][1], trajetoria[0][2], trajetoria[1][0], trajetoria[1][1], trajetoria[1][2])
+
 def main():
     id_robot = 1
     TopicMQTT(id_robot)
