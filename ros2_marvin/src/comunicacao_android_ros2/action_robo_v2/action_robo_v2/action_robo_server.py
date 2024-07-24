@@ -110,6 +110,12 @@ class HoverActionServer(Node):
                 "current_x": feedback_msg.current_x,    
                 "current_y": feedback_msg.current_y,
                 "current_z": feedback_msg.current_z,
+                "initial_x": initial_x,
+                "initial_y": initial_y,
+                "initial_z": initial_z,
+                "final_x": final_x,
+                "final_y": final_y,
+                "final_z": final_z
             }
             
             self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())
@@ -151,6 +157,12 @@ class HoverActionServer(Node):
             "current_x": feedback_msg.current_x,    
             "current_y": feedback_msg.current_y,
             "current_z": feedback_msg.current_z,
+            "initial_x": initial_x,
+            "initial_y": initial_y,
+            "initial_z": initial_z,
+            "final_x": final_x,
+            "final_y": final_y,
+            "final_z": final_z
         }
             
         self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())
