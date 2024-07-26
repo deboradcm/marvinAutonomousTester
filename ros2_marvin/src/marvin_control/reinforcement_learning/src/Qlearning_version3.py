@@ -231,18 +231,25 @@ class TopicMQTT:
 
     def gerar_acoes(self):
         acoes = []
-        interval_x = [0.0, 0.2]
-        interval_y = [0.0, 0.2]
-        interval_z = [0.0, 0.4]
+        interval_x = [-0.5, 0.5]
+        interval_y = [-0.5, 0.5]
+        interval_z = [0.0, 0.5]
         step = 0.05
 
-        for x in np.arange(interval_x[0], interval_x[1], step):
-            for y in np.arange(interval_y[0], interval_y[1], step):
-                for z in np.arange(interval_z[0], interval_z[1], step):
-                    acao = ((0.0, 0.0, 0.0), (x, y, z))
-                    acoes.append(acao)
+        for x in np.arange(interval_x[0], interval_x[1] + step, step):
+            for y in np.arange(interval_y[0], interval_y[1] + step, step):
+                for z in np.arange(interval_z[0], interval_z[1] + step, step):
+                    if self.is_within_workspace(x, y, z):
+                        acao = ((0.0, 0.0, 0.0), (x, y, z))
+                        acoes.append(acao)
         print(f"Ações geradas: {acoes}")
         return acoes
+
+    def is_within_workspace(self, x, y, z):
+        # Função is_within_workspace movida para dentro da classe TopicMQTT para reutilização
+        if -0.5 <= x <= 0.5 and -0.5 <= y <= 0.5 and 0.0 <= z <= 0.5:
+            return True
+        return False
 
     def on_connect(self, client, userdata, flags, rc):
         print("Connected to MQTT broker with result code %d." % rc)
