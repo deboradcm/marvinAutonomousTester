@@ -120,6 +120,8 @@ class QLearning:
         self.gamma = gamma
         self.epsilon = epsilon
         self.mqtt_client = mqtt_client
+        self.total_actions = 0
+        self.successful_actions = 0
 
     def get_q_value(self, state, action):
         return self.q_table.get((state, action), 0.0)
@@ -130,6 +132,12 @@ class QLearning:
         new_q_value = old_q_value + self.alpha * (reward + self.gamma * max(future_q_values) - old_q_value)
         self.q_table[(state, action)] = new_q_value
         self.publish_q_table()
+
+        # Atualize contadores de ações
+        self.total_actions += 1
+        if reward > 0:
+            self.successful_actions += 1
+
         print(f"Q-value atualizado: {self.q_table[(state, action)]} para estado: {state} e ação: {action}")
 
     def publish_q_table(self):
@@ -153,7 +161,7 @@ class QLearning:
             print(f"Todos os Q-values para o estado {state} são zero. Escolhendo ação aleatória.")
             return random.choice(self.actions)
         best_action = self.actions[q_values.index(max_q)]
-        print(f"Diret policy escolheu a ação: {best_action} para estado: {state} com Q-value: {max_q}")
+        print(f"Direct policy escolheu a ação: {best_action} para estado: {state} com Q-value: {max_q}")
         return best_action
 
     def epsilon_greedy_policy(self, state):
@@ -163,6 +171,12 @@ class QLearning:
             return chosen_action
         else:
             return self.direct_policy(state)
+
+    def get_accuracy(self):
+        if self.total_actions == 0:
+            return 0.0  # Evita divisão por zero se nenhuma ação foi tomada
+        return (self.successful_actions / self.total_actions) * 100
+
 
 class Robot:
     def __init__(self, robot_id, actions, qlearning):
@@ -237,25 +251,30 @@ class TopicMQTT:
         print(msg.topic)
         print(msg)
         try:
-            data = json.loads(msg.payload.decode())
+            if msg.topic == 'qlearning/q_table':
+                new_q_table = json.loads(msg.payload.decode())
+                self.qlearning.merge_q_table(new_q_table)
+            elif msg.topic == 'hover_data':
+                data = json.loads(msg.payload.decode())
 
-            required_keys = ['message', 'id_robot', 'current_x', 'current_y', 'current_z']
-            if all(key in data for key in required_keys):
-                reward = DEFAULT_REWARD
+                required_keys = ['message', 'id_robot', 'current_x', 'current_y', 'current_z']
+                if all(key in data for key in required_keys):
+                    reward = DEFAULT_REWARD
 
-                if data['message'] in ['success', 'failure']:
                     if data['message'] == 'success':
                         reward = BUTTON_PRESSED_REWARD
-                    self.robot.coordenada_robo(data['current_x'], data['current_y'], data['current_z'], reward)
-                else:
-                    if all(key in data for key in ['initial_x', 'initial_y', 'initial_z', 'final_x', 'final_y', 'final_z']):
-                        self.robot.trajetoria_robo(data['initial_x'], data['initial_y'], data['initial_z'], data['final_x'], data['final_y'], data['final_z'], reward)
+                        self.robot.coordenada_robo(data['current_x'], data['current_y'], data['current_z'], reward)
+                    elif data['message'] == 'failure':
+                        print("Mensagem de falha recebida. Nenhuma atualização de coordenadas será feita, gerando nova trajetória.")
 
-                use_direct_policy = (data['message'] == 'success')
-                proxima_trajetoria = self.robot.escolher_proxima_trajetoria(use_direct_policy)
-                self.publicar_proxima_trajetoria(self.robot.robot_id, proxima_trajetoria)
-            else:
-                print("Erro: Mensagem MQTT não contém as chaves necessárias")
+                    use_direct_policy = (data['message'] == 'success')
+                    proxima_trajetoria = self.robot.escolher_proxima_trajetoria(use_direct_policy)
+                    self.publicar_proxima_trajetoria(self.robot.robot_id, proxima_trajetoria)
+                    
+                    accuracy = self.qlearning.get_accuracy()
+                    print(f"Current accuracy: {accuracy:.2f}%")
+                else:
+                    print("Erro: Mensagem MQTT não contém as chaves necessárias")
         except Exception as e:
             print(f"Erro ao processar mensagem MQTT: {e}")
 
@@ -282,3 +301,4 @@ if __name__ == "__main__":
         print(e)
         
     topic_mqtt = TopicMQTT(id_robot=1)
+
