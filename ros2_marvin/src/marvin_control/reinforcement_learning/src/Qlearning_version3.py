@@ -19,10 +19,6 @@ action_robo_v2_dir = os.path.join(project_dir, 'comunicacao_android_ros2', 'acti
 # Adiciona o diretório correto ao sys.path
 sys.path.append(action_robo_v2_dir)
 
-print("sys.path:")
-for path in sys.path:
-    print(path)
-
 # Tenta importar após adicionar o caminho ao sys.path
 try:
     from action_robo_v2.action_robo_client import HoverActionClient
@@ -35,30 +31,25 @@ from ur_analytic_ik import ur3e
 
 class ControllerRobot:
     def calculate_joint_angles(self, x, y, z):
-        # Adiciona mensagens de depuração para verificar as coordenadas
         print(f"Calculando ângulos das juntas para x: {x}, y: {y}, z: {z}")
         
-        # Verifica se as coordenadas estão dentro de um intervalo esperado
         if not self.is_within_workspace(x, y, z):
-            raise ValueError("As coordenadas fornecidas estão fora do espaço de trabalho do robô.")
+            raise ValueError(f"As coordenadas fornecidas ({x}, {y}, {z}) estão fora do espaço de trabalho do robô.")
         
         eef_pose = np.identity(4)
         eef_pose[:3, 3] = [x, y, z]
         eef_pose[:3, :3] = np.identity(3)  # Orientação padrão
 
-        print(f"eef_pose: {eef_pose}")  # Depuração adicional
-
         try:
             joint_solutions = ur3e.inverse_kinematics(eef_pose)
-            print(f"Joint solutions: {joint_solutions}")  # Depuração
             if len(joint_solutions) == 0:
-                raise ValueError("Nenhuma solução válida para as juntas foi encontrada para a posição fornecida.")
-            joint_angles = joint_solutions[0][0]  # Seleciona a primeira solução e converte para 1D
+                raise ValueError(f"Nenhuma solução válida para as juntas foi encontrada para a posição fornecida ({x}, {y}, {z}).")
+            joint_angles = joint_solutions[0][0]
             print(f"Selected joint angles: {joint_angles}")  # Depuração
             return joint_angles
         except Exception as e:
             print(f"Erro ao calcular cinemática inversa: {e}")
-            raise ValueError("Erro ao calcular cinemática inversa.")
+            raise ValueError(f"Erro ao calcular cinemática inversa para a posição ({x}, {y}, {z}).")
         
     def send_joint_angles_to_robot(self, joint_angles):
         joint_names = [
@@ -70,7 +61,6 @@ class ControllerRobot:
             "wrist_3_joint"
         ]
         
-        # Certifique-se de que joint_angles é um array 1D
         positions = [float(angle) for angle in joint_angles.flatten()]
         
         command = (
@@ -80,29 +70,13 @@ class ControllerRobot:
             f'velocities: [], accelerations: [], time_from_start: {{sec: 6, nanosec: 0}}}}]}}}}"'
         )
         
-        print(f"Executando comando: {command}")  # Depuração
-        result = subprocess.run(command, shell=True, capture_output=True, text=True)
-        print(f"Resultado do comando: {result.stdout}")
-        if result.stderr:
-            print(f"Erro ao executar comando: {result.stderr}")
+        print(f"Executando comando: {command}")
+        subprocess.run(command, shell=True, check=True)
 
-    def is_within_workspace(self, x, y, z): # Limites ajustados com base no alcance máximo de 500 mm (0.5 metros)
-        if -0.5 <= x <= 0.5 and -0.5 <= y <= 0.5 and 0.0 <= z <= 0.5:
+    def is_within_workspace(self, x, y, z):
+        if 0.05 <= x <= 0.45 and 0.05 <= y <= 0.45 and 0.1 <= z <= 0.5:  # Ajustar limites para evitar colisões
             return True
         return False
-
-
-if __name__ == "__main__":
-
-    controller = ControllerRobot()
-    try:
-
-        joint_angles = controller.calculate_joint_angles(0.08, 0.9, 0.5)
-        controller.send_joint_angles_to_robot(joint_angles)
-    except ValueError as e:
-        print(e)
-        
-
 
 # Configura o logging
 logger = logging.getLogger()
@@ -133,7 +107,6 @@ class QLearning:
         self.q_table[(state, action)] = new_q_value
         self.publish_q_table()
 
-        # Atualize contadores de ações
         self.total_actions += 1
         if reward > 0:
             self.successful_actions += 1
@@ -174,22 +147,20 @@ class QLearning:
 
     def get_accuracy(self):
         if self.total_actions == 0:
-            return 0.0  # Evita divisão por zero se nenhuma ação foi tomada
+            return 0.0
         return (self.successful_actions / self.total_actions) * 100
-
 
 class Robot:
     def __init__(self, robot_id, actions, qlearning):
         self.robot_id = robot_id
         self.actions = actions
         self.qlearning = qlearning
-        self.current_state = (0.0, 0.0, 0.0)  # Define o estado inicial
+        self.current_state = (0.0, 0.0, 0.0)
         self.current_action = None
         self.controller = ControllerRobot()
 
     def coordenada_robo(self, x, y, z, reward):
         next_state = (x, y, z)
-        print(f"Atualizando Q-value com estado atual: {self.current_state}, ação: {self.current_action}, recompensa: {reward}, próximo estado: {next_state}")
         self.qlearning.update_q_value(self.current_state, self.current_action, reward, next_state)
         self.current_state = next_state
         try:
@@ -199,7 +170,6 @@ class Robot:
             print(e)
 
     def trajetoria_robo(self, xa, ya, za, xb, yb, zb, reward):
-        print(f"Atualizando Q-value com trajetória: ({xa}, {ya}, {za}) -> ({xb}, {yb}, {zb}), recompensa: {reward}")
         self.qlearning.update_q_value(self.current_state, self.current_action, reward, (xb, yb, zb))
         self.current_state = (xb, yb, zb)
         try:
@@ -218,8 +188,9 @@ class Robot:
 
 class TopicMQTT:
     def __init__(self, id_robot):
-        self.client = mqtt.Client()
-        self.qlearning = QLearning(actions=self.gerar_acoes(), mqtt_client=self.client)
+        self.client = mqtt.Client(client_id="", clean_session=True, userdata=None, protocol=mqtt.MQTTv311)
+        self.actions = self.gerar_acoes()
+        self.qlearning = QLearning(actions=self.actions, mqtt_client=self.client)
         self.robot = Robot(id_robot, actions=self.qlearning.actions, qlearning=self.qlearning)
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -231,9 +202,9 @@ class TopicMQTT:
 
     def gerar_acoes(self):
         acoes = []
-        interval_x = [-0.5, 0.5]
-        interval_y = [-0.5, 0.5]
-        interval_z = [0.0, 0.5]
+        interval_x = [0.05, 0.45]  # Limitar para valores positivos
+        interval_y = [0.05, 0.45]  # Limitar para valores positivos
+        interval_z = [0.1, 0.5]    # Evitar valores próximos ao chão
         step = 0.05
 
         for x in np.arange(interval_x[0], interval_x[1] + step, step):
@@ -242,21 +213,15 @@ class TopicMQTT:
                     if self.is_within_workspace(x, y, z):
                         acao = ((0.0, 0.0, 0.0), (x, y, z))
                         acoes.append(acao)
-        print(f"Ações geradas: {acoes}")
         return acoes
 
     def is_within_workspace(self, x, y, z):
-        # Função is_within_workspace movida para dentro da classe TopicMQTT para reutilização
-        if -0.5 <= x <= 0.5 and -0.5 <= y <= 0.5 and 0.0 <= z <= 0.5:
-            return True
-        return False
+        return 0.05 <= x <= 0.45 and 0.05 <= y <= 0.45 and 0.1 <= z <= 0.5
 
     def on_connect(self, client, userdata, flags, rc):
         print("Connected to MQTT broker with result code %d." % rc)
 
     def on_message(self, client, userdata, msg):
-        print(msg.topic)
-        print(msg)
         try:
             if msg.topic == 'qlearning/q_table':
                 new_q_table = json.loads(msg.payload.decode())
@@ -270,9 +235,10 @@ class TopicMQTT:
 
                     if data['message'] == 'success':
                         reward = BUTTON_PRESSED_REWARD
-                        self.robot.coordenada_robo(data['current_x'], data['current_y'], data['current_z'], reward)
                     elif data['message'] == 'failure':
                         print("Mensagem de falha recebida. Nenhuma atualização de coordenadas será feita, gerando nova trajetória.")
+
+                    self.robot.coordenada_robo(data['current_x'], data['current_y'], data['current_z'], reward)
 
                     use_direct_policy = (data['message'] == 'success')
                     proxima_trajetoria = self.robot.escolher_proxima_trajetoria(use_direct_policy)
@@ -287,9 +253,7 @@ class TopicMQTT:
 
     def send_action_robot(self, robot_id, initial_x, initial_y, initial_z, final_x, final_y, final_z):
         command = f'ros2 action send_goal /hover_action action_marvin_interfaces/action/Hover "{{id_robot: {robot_id}, initial_x: {initial_x}, initial_y: {initial_y}, initial_z: {initial_z}, final_x: {final_x}, final_y: {final_y}, final_z: {final_z}}}"'
-        print(f"Executando comando: {command}")
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
-        print(f"Resultado do comando: {result.stdout}")
         if result.stderr:
             print(f"Erro ao executar comando: {result.stderr}")
 
@@ -298,14 +262,35 @@ class TopicMQTT:
         self.send_action_robot(robot_id, *initial_coords, *final_coords)
 
 if __name__ == "__main__":
-
     controller = ControllerRobot()
-    try:
-
-        joint_angles = controller.calculate_joint_angles(0.05, 0.01, 0.02)
-        controller.send_joint_angles_to_robot(joint_angles)
-    except ValueError as e:
-        print(e)
-        
     topic_mqtt = TopicMQTT(id_robot=1)
+    q_learning = topic_mqtt.qlearning
 
+    # Loop principal do Q-Learning
+    for episode in range(1000):  # Número de episódios de treinamento
+        state = (0.0, 0.0, 0.0)  # Estado inicial
+        done = False
+
+        while not done:
+            action = q_learning.epsilon_greedy_policy(state)
+            next_state = action[1]
+
+            try:
+                joint_angles = controller.calculate_joint_angles(*next_state)
+                controller.send_joint_angles_to_robot(joint_angles)
+            except ValueError as e:
+                print(e)
+                reward = -1  # Penalidade por ação inválida
+                next_state = state  # Mantém o estado atual
+            else:
+                reward = 1  # Recompensa por ação válida
+
+            q_learning.update_q_value(state, action, reward, next_state)
+            state = next_state
+
+            # Verificação de condição de término do episódio
+            if reward == BUTTON_PRESSED_REWARD:  # Condição de sucesso
+                done = True
+                print("Episódio concluído com sucesso!")
+
+            topic_mqtt.client.loop()  # Processa mensagens MQTT
