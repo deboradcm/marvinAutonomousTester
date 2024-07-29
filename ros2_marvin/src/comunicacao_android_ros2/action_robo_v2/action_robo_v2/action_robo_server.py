@@ -120,20 +120,18 @@ class HoverActionServer(Node):
             
             self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())
 
-            rclpy.spin_once(self, timeout_sec=1)  # Aguarda 1 segundos entre os passos
-
-        # Indica que o objetivo foi alcançado com sucesso
+            rclpy.spin_once(self, timeout_sec=1)  # Aguarda pela próxima iteração
+        
         goal_handle.succeed()
         
-        # Cria uma mensagem de resultado final
         result_msg = Hover.Result()
         result_msg.message = "finish"
         result_msg.id_robot = self.id_robot
-        result_msg.x = feedback_msg.current_x  # Mantém a mesma posição x
-        result_msg.y = feedback_msg.current_y  # Mantém a mesma posição y
-        result_msg.z = feedback_msg.current_z  # Mantém a mesma posição z
+        result_msg.x = feedback_msg.current_x  
+        result_msg.y = feedback_msg.current_y  
+        result_msg.z = feedback_msg.current_z  
 
-        # Verifica se o toque não foi recebido, indicando falha
+        #caso nao tenha nenhum click, mandar o id_robot, initial_x, initial_y, initial_z
         if self._received_touch == 'false':
             hover_data = {
                 "message": "failure",
@@ -149,8 +147,6 @@ class HoverActionServer(Node):
             self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())
             return result_msg
         
-        # Publica uma mensagem de sucesso no tópico MQTT
-        #QUANDO A MSG FOR DE SUCESSO, FAZER COM QUE A IA RESET AS TRAJETORIAS DE FALHA
         hover_data = {
             "message": "success",
             "id_robot": self.id_robot,
@@ -166,7 +162,6 @@ class HoverActionServer(Node):
         }
             
         self._mqtt_client.publish(self.mqtt_topic, json.dumps(hover_data).encode())
-        
 
         return result_msg
 
