@@ -1,13 +1,14 @@
 # Marvin
 ## Projeto de Teste Automático Colaborativo em Múltiplos Dispositivos
 
-Este projeto faz parte da Especialização em IA para Engenharia de Testes de Software.
+Este é um projeto experimental que faz parte da Especialização em IA para Engenharia de Testes de Software.
 
 ## Requisitos
 
 - Ubuntu 22.04.4 LTS (jammy)
 - [Ros2-Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 - [Gazebo 11.10.2](https://classic.gazebosim.org/tutorials?tut=install_ubuntu)
+- Android Studio Koala 2024.1.1
 
 ## Instalando o projeto
 ```
