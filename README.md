@@ -1,5 +1,5 @@
 # Marvin
-## Projeto de Teste Automático Colaborativo em Múltiplos Dispositivos
+## Sistema Autônomo para Testes Exploratórios na Interface Gráfica de Aplicações Móveis Usando Aprendizado por Reforço
 
 Este é um projeto experimental que faz parte da Especialização em IA para Engenharia de Testes de Software.
 
